@@ -49,7 +49,7 @@ export const navItems = [
   
     {
       id: 5,
-      title: "Currently building a JS Animation library",
+      title: "Currently Learning Ai",
       description: "The Inside Scoop",
       className: "md:col-span-3 md:row-span-2",
       imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
@@ -140,62 +140,62 @@ export const navItems = [
   export const companies = [
     {
       id: 1,
-      name: "cloudinary",
-      img: "/cloud.svg",
-      nameImg: "/cloudName.svg",
+      name: "Darbuka",
+      img: "logicsfield.svg",
+      nameImg: "/Darbuka.webp",
     },
-    {
-      id: 2,
-      name: "appwrite",
-      img: "/app.svg",
-      nameImg: "/appName.svg",
-    },
+    // {
+    //   id: 2,
+    //   name: "TechSolutions",
+    //   img: "/app.svg",
+    //   nameImg: "/appName.svg",
+    // },
     {
       id: 3,
-      name: "HOSTINGER",
-      img: "/host.svg",
-      nameImg: "/hostName.svg",
+      name: "LogicsField",
+      img: "/logicsfield.svg",
+      nameImg: "/logicsfield-black.svg",
     },
-    {
-      id: 4,
-      name: "stream",
-      img: "/s.svg",
-      nameImg: "/streamName.svg",
-    },
-    {
-      id: 5,
-      name: "docker.",
-      img: "/dock.svg",
-      nameImg: "/dockerName.svg",
-    },
+    // // {
+    //   id: 4,
+    //   name: "stream",
+    //   img: "/s.svg",
+    //   nameImg: "/streamName.svg",
+    // },
+    // {
+    //   id: 5,
+    //   name: "docker.",
+    //   img: "/dock.svg",
+    //   nameImg: "/dockerName.svg",
+    // },
   ];
   
   export const workExperience = [
     {
       id: 1,
-      title: "Frontend Engineer Intern",
-      desc: "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
+      title: "Junior Developer Intern",
+      desc: "Developed plugins, websites, and themes using WordPress while leveraging frontend development skills to create user-friendly interfaces with HTML, CSS, and JavaScript.",
       className: "md:col-span-2",
       thumbnail: "/exp1.svg",
     },
     {
       id: 2,
-      title: "Mobile App Dev - JSM Tech",
-      desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
+      title: "Full Stack Developer",
+      desc: "Created engaging user interfaces with React and built RESTful APIs using Node and Python, managing data with MongoDB. Enhanced a language translation application with AI solutions using Python and PyTorch, and integrated third-party tools seamlessly with Python (Flask).",
       className: "md:col-span-2", // change to md:col-span-2
       thumbnail: "/exp2.svg",
     },
     {
       id: 3,
-      title: "Freelance App Dev Project",
-      desc: "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
-      className: "md:col-span-2", // change to md:col-span-2
+      title: "Freelance Web Developer ",
+      desc: "Led the dev of a Web app for a client, from initial concept to deployment",
+      className: "md:col-span-2", 
       thumbnail: "/exp3.svg",
     },
     {
       id: 4,
-      title: "Lead Frontend Developer",
-      desc: "Developed and maintained user-facing features using modern frontend technologies.",
+      title: "Backend Engineer",
+      desc: "Led the backend development of a Enterprise-level solution  written in Node.js using the Express and Serverless framework with AWS.",
       className: "md:col-span-2",
       thumbnail: "/exp4.svg",
     },
@@ -205,13 +205,18 @@ export const navItems = [
     {
       id: 1,
       img: "/git.svg",
+      link: "https://github.com/Hnour09", 
     },
     {
       id: 2,
-      img: "/twit.svg",
+      img: "/twit.svg",      
+      link: "https://github.com/Hnour09", 
+
     },
     {
       id: 3,
       img: "/link.svg",
+      link: "https://www.linkedin.com/in/hadi-nour-eddine/", 
+
     },
   ];
