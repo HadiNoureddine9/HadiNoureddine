@@ -209,7 +209,7 @@ export const navItems = [
     },
     {
       id: 2,
-      img: "/twit.svg",      
+      img: "/git.svg",      
       link: "https://github.com/Hnour09", 
 
     },
