@@ -205,12 +205,12 @@ export const navItems = [
     {
       id: 1,
       img: "/git.svg",
-      link: "https://github.com/Hnour09", 
+      link: "https://github.com/HadiNoureddine9", 
     },
     {
       id: 2,
       img: "/git.svg",      
-      link: "https://github.com/Hnour09", 
+      link: "https://github.com/HadiNoureddine9", 
 
     },
     {
