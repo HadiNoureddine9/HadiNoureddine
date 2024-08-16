@@ -49,10 +49,10 @@ export const navItems = [
   
     {
       id: 5,
-      title: "AWS Certified Cloud Practitioner",
-      description: "The Inside Scoop: Cloud Computing Enthusiast",
+      title: "AWS CCP",
+      description: " Cloud Enthusiast",
       className: "md:col-span-3 md:row-span-2",
-      imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
+      imgClassName: "absolute right-0 bottom-0 md:w-96 w-60  sm: w-40 w-40",
       titleClassName: "justify-center md:justify-start lg:justify-center",
       img: "/AWS CCP certification.png",
       spareImg: "/grid.svg",
