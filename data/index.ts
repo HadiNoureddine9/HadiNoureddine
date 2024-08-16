@@ -49,12 +49,12 @@ export const navItems = [
   
     {
       id: 5,
-      title: "Currently Learning Ai",
-      description: "The Inside Scoop",
+      title: "AWS Certified Cloud Practitioner",
+      description: "The Inside Scoop: Cloud Computing Enthusiast",
       className: "md:col-span-3 md:row-span-2",
       imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
       titleClassName: "justify-center md:justify-start lg:justify-center",
-      img: "/b5.svg",
+      img: "/AWS CCP certification.png",
       spareImg: "/grid.svg",
     },
     {
@@ -72,7 +72,7 @@ export const navItems = [
   export const projects = [
     {
       id: 1,
-      title: "3D Solar System Planets to Explore",
+      title: "E-Commerce Shop",
       des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
       img: "/p1.svg",
       iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
