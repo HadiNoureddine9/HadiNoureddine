@@ -173,12 +173,11 @@ export const navItems = [
   export const workExperience = [
     {
       id: 1,
-      title: "Junior Developer Intern",
-      desc: "Developed plugins, websites, and themes using WordPress while leveraging frontend development skills to create user-friendly interfaces with HTML, CSS, and JavaScript.",
+      title: "Backend Engineer",
+      desc: "Led the backend development of a Enterprise-level solution  written in Node.js using the Express and Serverless framework with AWS.",
       className: "md:col-span-2",
-      thumbnail: "/exp1.svg",
-    },
-    {
+      thumbnail: "/exp4.svg",
+    },{
       id: 2,
       title: "Full Stack Developer",
       desc: "Created engaging user interfaces with React and built RESTful APIs using Node and Python, managing data with MongoDB. Enhanced a language translation application with AI solutions using Python and PyTorch, and integrated third-party tools seamlessly with Python (Flask).",
@@ -187,17 +186,18 @@ export const navItems = [
     },
     {
       id: 3,
-      title: "Freelance Web Developer ",
-      desc: "Led the dev of a Web app for a client, from initial concept to deployment",
-      className: "md:col-span-2", 
-      thumbnail: "/exp3.svg",
+      title: "Junior Developer Intern",
+      desc: "Developed plugins, websites, and themes using WordPress while leveraging frontend development skills to create user-friendly interfaces with HTML, CSS, and JavaScript.",
+      className: "md:col-span-2",
+      thumbnail: "/exp1.svg",
     },
+    
     {
       id: 4,
-      title: "Backend Engineer",
-      desc: "Led the backend development of a Enterprise-level solution  written in Node.js using the Express and Serverless framework with AWS.",
-      className: "md:col-span-2",
-      thumbnail: "/exp4.svg",
+      title: "Freelance Web Developer ",
+      desc: "Web Development from initial concept to deployment",
+      className: "md:col-span-2", 
+      thumbnail: "/exp3.svg",
     },
   ];
   
