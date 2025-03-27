@@ -72,7 +72,7 @@ export const navItems = [
   export const projects = [
     {
       id: 1,
-      title: "Comming soon",
+      title: "Coming soon",
       des: "UnderConstruction",
       img: "/p1.svg",
       iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
@@ -80,7 +80,7 @@ export const navItems = [
     },
     {
       id: 2,
-      title: "Comming soon",
+      title: "Coming soon",
       des: "UnderConstruction",
       img: "/p2.svg",
       iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
@@ -88,7 +88,7 @@ export const navItems = [
     },
     {
       id: 3,
-      title: "Comming soon",
+      title: "Coming soon",
       des: "UnderConstruction",
       img: "/p3.svg",
       iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
@@ -96,7 +96,7 @@ export const navItems = [
     },
     {
       id: 4,
-      title: "Comming soon",
+      title: "Coming soon",
       des: "UnderConstruction",
       img: "/p4.svg",
       iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
@@ -107,31 +107,31 @@ export const navItems = [
   export const testimonials = [
     {
       quote:
-        "Comming Soon",
+        "Coming Soon",
       name: "Satified Client",
       title: "CEO ",
     },
     {
       quote:
-        "Comming Soon",
+        "Coming Soon",
       name: "Satified Client",
       title: "CEO",
     },
     {
       quote:
-        "Comming Soon",
+        "Coming Soon",
       name: "Satified Client",
       title: "CEO",
     },
     {
       quote:
-        "Comming Soon",
+        "Coming Soon",
       name: "Satified Client",
       title: "CEO",
     },
     {
       quote:
-        "Comming Soon",
+        "Coming Soon",
       name: "Satified Client",
       title: "Director of AlphaStream Technologies",
     },
@@ -207,12 +207,12 @@ export const navItems = [
       img: "/git.svg",
       link: "https://github.com/HadiNoureddine9", 
     },
-    {
-      id: 2,
-      img: "/git.svg",      
-      link: "https://github.com/HadiNoureddine9", 
+    // {
+    //   id: 2,
+    //   img: "/git.svg",      
+    //   link: "https://github.com/HadiNoureddine9", 
 
-    },
+    // },
     {
       id: 3,
       img: "/link.svg",
