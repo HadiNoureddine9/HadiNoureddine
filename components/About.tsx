@@ -207,7 +207,7 @@ const About = () => {
                         </p>
                         <p className="text-white-100">
                             I automate everything I can - from recruitment workflows to deployment pipelines.
-                            If it can be automated, I'll find a way! 🤖
+                            If it can be automated, I&apos;ll find a way! 🤖
                         </p>
                     </div>
                 </motion.div>

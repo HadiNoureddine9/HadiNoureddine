@@ -8,18 +8,23 @@ import { FaLocationArrow, FaDownload } from "react-icons/fa6";
 import { personalInfo } from '@/data';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 
+const roles = [
+  "Full-Stack Developer",
+  "Backend Architect",
+  "Frontend Engineer",
+  "Cloud Solutions Expert",
+  "DevOps Specialist",
+  "Software Engineer"
+];
+
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [currentRole, setCurrentRole] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  const roles = [
-    "Full-Stack Developer",
-    "Backend Architect",
-    "Frontend Engineer",
-    "Cloud Solutions Expert",
-    "DevOps Specialist",
-    "Software Engineer"
-  ];
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Rotating roles
   useEffect(() => {
@@ -65,7 +70,7 @@ const Hero = () => {
 
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {mounted && [...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-purple/30 rounded-full"

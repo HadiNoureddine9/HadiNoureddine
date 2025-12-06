@@ -63,12 +63,12 @@ let numbersOfRings = [0];
 export function Globe({ globeConfig, data }: WorldProps) {
   const [globeData, setGlobeData] = useState<
     | {
-        size: number;
-        order: number;
-        color: (t: number) => string;
-        lat: number;
-        lng: number;
-      }[]
+      size: number;
+      order: number;
+      color: (t: number) => string;
+      lat: number;
+      lng: number;
+    }[]
     | null
   >(null);
 
@@ -93,60 +93,60 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
   useEffect(() => {
     if (globeRef.current) {
+      const _buildData = () => {
+        const arcs = data;
+        let points = [];
+        for (let i = 0; i < arcs.length; i++) {
+          const arc = arcs[i];
+          const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
+          points.push({
+            size: defaultProps.pointSize,
+            order: arc.order,
+            color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
+            lat: arc.startLat,
+            lng: arc.startLng,
+          });
+          points.push({
+            size: defaultProps.pointSize,
+            order: arc.order,
+            color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
+            lat: arc.endLat,
+            lng: arc.endLng,
+          });
+        }
+
+        // remove duplicates for same lat and lng
+        const filteredPoints = points.filter(
+          (v, i, a) =>
+            a.findIndex((v2) =>
+              ["lat", "lng"].every(
+                (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"]
+              )
+            ) === i
+        );
+
+        setGlobeData(filteredPoints);
+      };
+
+      const _buildMaterial = () => {
+        if (!globeRef.current) return;
+
+        const globeMaterial = globeRef.current.globeMaterial() as unknown as {
+          color: Color;
+          emissive: Color;
+          emissiveIntensity: number;
+          shininess: number;
+        };
+        globeMaterial.color = new Color(globeConfig.globeColor);
+        globeMaterial.emissive = new Color(globeConfig.emissive);
+        globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
+        globeMaterial.shininess = globeConfig.shininess || 0.9;
+      };
+
       _buildData();
       _buildMaterial();
     }
-  }, [globeRef.current]);
-
-  const _buildMaterial = () => {
-    if (!globeRef.current) return;
-
-    const globeMaterial = globeRef.current.globeMaterial() as unknown as {
-      color: Color;
-      emissive: Color;
-      emissiveIntensity: number;
-      shininess: number;
-    };
-    globeMaterial.color = new Color(globeConfig.globeColor);
-    globeMaterial.emissive = new Color(globeConfig.emissive);
-    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
-    globeMaterial.shininess = globeConfig.shininess || 0.9;
-  };
-
-  const _buildData = () => {
-    const arcs = data;
-    let points = [];
-    for (let i = 0; i < arcs.length; i++) {
-      const arc = arcs[i];
-      const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
-      points.push({
-        size: defaultProps.pointSize,
-        order: arc.order,
-        color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
-        lat: arc.startLat,
-        lng: arc.startLng,
-      });
-      points.push({
-        size: defaultProps.pointSize,
-        order: arc.order,
-        color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
-        lat: arc.endLat,
-        lng: arc.endLng,
-      });
-    }
-
-    // remove duplicates for same lat and lng
-    const filteredPoints = points.filter(
-      (v, i, a) =>
-        a.findIndex((v2) =>
-          ["lat", "lng"].every(
-            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"]
-          )
-        ) === i
-    );
-
-    setGlobeData(filteredPoints);
-  };
+  }, [globeRef.current, data, defaultProps.pointSize, globeConfig.globeColor, globeConfig.emissive, globeConfig.emissiveIntensity, globeConfig.shininess]);
 
   useEffect(() => {
     if (globeRef.current && globeData) {
@@ -162,7 +162,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
         });
       startAnimation();
     }
-  }, [globeData]);
+  }, [globeData, defaultProps.showAtmosphere, defaultProps.atmosphereColor, defaultProps.atmosphereAltitude, defaultProps.polygonColor]);
 
   const startAnimation = () => {
     if (!globeRef.current || !globeData) return;
@@ -221,7 +221,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     return () => {
       clearInterval(interval);
     };
-  }, [globeRef.current, globeData]);
+  }, [globeRef.current, globeData, data.length]);
 
   return (
     <>
@@ -237,7 +237,7 @@ export function WebGLRendererConfig() {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, []);
+  }, [gl, size.width, size.height]);
 
   return null;
 }
@@ -287,10 +287,10 @@ export function hexToRgb(hex: string) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+    }
     : null;
 }
 

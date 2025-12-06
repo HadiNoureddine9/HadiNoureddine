@@ -4,6 +4,7 @@ import { FaLocationArrow, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icon
 import { socialMedia, personalInfo } from "@/data";
 import MagicButton from "./ui/MagicButton";
 import Link from 'next/link';
+import Image from "next/image";
 import { motion } from 'framer-motion';
 
 const Footer = () => {
@@ -151,7 +152,7 @@ const Footer = () => {
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-12 h-12 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300 hover:border-purple/[0.5] transition-all"
                 >
-                  <img src={info.img} alt={info.name} width={24} height={24} />
+                  <Image src={info.img} alt={info.name} width={24} height={24} />
                 </motion.div>
               </Link>
             ))}
@@ -175,7 +176,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-1 text-white-200 hover:text-purple transition-colors"
           >
-            <img src="/link.svg" alt="LinkedIn" width={20} height={20} />
+            <Image src="/link.svg" alt="LinkedIn" width={20} height={20} />
             <span className="text-xs">LinkedIn</span>
           </a>
           <a
@@ -184,7 +185,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-1 text-white-200 hover:text-purple transition-colors"
           >
-            <img src="/git.svg" alt="GitHub" width={20} height={20} />
+            <Image src="/git.svg" alt="GitHub" width={20} height={20} />
             <span className="text-xs">GitHub</span>
           </a>
         </div>
