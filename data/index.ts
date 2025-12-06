@@ -1,222 +1,337 @@
 export const navItems = [
-    { name: "About", link: "#about" },
-    { name: "Projects", link: "#projects" },
-    { name: "Testimonials", link: "#testimonials" },
-    { name: "Contact", link: "#contact" },
-  ];
-  
-  export const gridItems = [
-    {
-      id: 1,
-      title: "I prioritize client collaboration, fostering open communication ",
-      description: "",
-      className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
-      imgClassName: "w-full h-full",
-      titleClassName: "justify-end",
-      img: "/b1.svg",
-      spareImg: "",
-    },
-    {
-      id: 2,
-      title: "I'm very flexible with time zone communications",
-      description: "",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-      imgClassName: "",
-      titleClassName: "justify-start",
-      img: "",
-      spareImg: "",
-    },
-    {
-      id: 3,
-      title: "My tech stack",
-      description: "I constantly try to improve",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-      imgClassName: "",
-      titleClassName: "justify-center",
-      img: "",
-      spareImg: "",
-    },
-    {
-      id: 4,
-      title: "Tech enthusiast with a passion for development.",
-      description: "",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-      imgClassName: "",
-      titleClassName: "justify-start",
-      img: "/grid.svg",
-      spareImg: "/b4.svg",
-    },
-  
-    {
-      id: 5,
-      title: "AWS CCP",
-      description: " Cloud Enthusiast",
-      className: "md:col-span-3 md:row-span-2",
-      imgClassName: "absolute right-0 bottom-0 md:w-96 w-60  sm: w-40 w-40",
-      titleClassName: "justify-center md:justify-start lg:justify-center",
-      img: "/AWS CCP certification.png",
-      spareImg: "/grid.svg",
-    },
-    {
-      id: 6,
-      title: "Do you want to start a project together?",
-      description: "",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-      imgClassName: "",
-      titleClassName: "justify-center md:max-w-full max-w-60 text-center",
-      img: "",
-      spareImg: "",
-    },
-  ];
-  
-  export const projects = [
-    {
-      id: 1,
-      title: "Coming soon",
-      des: "UnderConstruction",
-      img: "/p1.svg",
-      iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-      link: "/ui.earth.com",
-    },
-    {
-      id: 2,
-      title: "Coming soon",
-      des: "UnderConstruction",
-      img: "/p2.svg",
-      iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-      link: "/ui.yoom.com",
-    },
-    {
-      id: 3,
-      title: "Coming soon",
-      des: "UnderConstruction",
-      img: "/p3.svg",
-      iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-      link: "/ui.aiimg.com",
-    },
-    {
-      id: 4,
-      title: "Coming soon",
-      des: "UnderConstruction",
-      img: "/p4.svg",
-      iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-      link: "/ui.apple.com",
-    },
-  ];
-  
-  export const testimonials = [
-    {
-      quote:
-        "Coming Soon",
-      name: "Satified Client",
-      title: "CEO ",
-    },
-    {
-      quote:
-        "Coming Soon",
-      name: "Satified Client",
-      title: "CEO",
-    },
-    {
-      quote:
-        "Coming Soon",
-      name: "Satified Client",
-      title: "CEO",
-    },
-    {
-      quote:
-        "Coming Soon",
-      name: "Satified Client",
-      title: "CEO",
-    },
-    {
-      quote:
-        "Coming Soon",
-      name: "Satified Client",
-      title: "Director of AlphaStream Technologies",
-    },
-  ];
-  
-  export const companies = [
-    {
-      id: 1,
-      name: "Darbuka",
-      img: "logicsfield.svg",
-      nameImg: "/Darbuka.webp",
-    },
-    // {
-    //   id: 2,
-    //   name: "TechSolutions",
-    //   img: "/app.svg",
-    //   nameImg: "/appName.svg",
-    // },
-    {
-      id: 3,
-      name: "LogicsField",
-      img: "/logicsfield.svg",
-      nameImg: "/logicsfield-black.svg",
-    },
-    // // {
-    //   id: 4,
-    //   name: "stream",
-    //   img: "/s.svg",
-    //   nameImg: "/streamName.svg",
-    // },
-    // {
-    //   id: 5,
-    //   name: "docker.",
-    //   img: "/dock.svg",
-    //   nameImg: "/dockerName.svg",
-    // },
-  ];
-  
-  export const workExperience = [
-    {
-      id: 1,
-      title: "Backend Engineer",
-      desc: "Led the backend development of a Enterprise-level solution  written in Node.js using the Express and Serverless framework with AWS.",
-      className: "md:col-span-2",
-      thumbnail: "/exp4.svg",
-    },{
-      id: 2,
-      title: "Full Stack Developer",
-      desc: "Created engaging user interfaces with React and built RESTful APIs using Node and Python, managing data with MongoDB. Enhanced a language translation application with AI solutions using Python and PyTorch, and integrated third-party tools seamlessly with Python (Flask).",
-      className: "md:col-span-2", // change to md:col-span-2
-      thumbnail: "/exp2.svg",
-    },
-    {
-      id: 3,
-      title: "Junior Developer Intern",
-      desc: "Developed plugins, websites, and themes using WordPress while leveraging frontend development skills to create user-friendly interfaces with HTML, CSS, and JavaScript.",
-      className: "md:col-span-2",
-      thumbnail: "/exp1.svg",
-    },
-    
-    {
-      id: 4,
-      title: "Freelance Web Developer ",
-      desc: "Web Development from initial concept to deployment",
-      className: "md:col-span-2", 
-      thumbnail: "/exp3.svg",
-    },
-  ];
-  
-  export const socialMedia = [
-    {
-      id: 1,
-      img: "/git.svg",
-      link: "https://github.com/HadiNoureddine9", 
-    },
-    // {
-    //   id: 2,
-    //   img: "/git.svg",      
-    //   link: "https://github.com/HadiNoureddine9", 
+  { name: "About", link: "#about" },
+  { name: "Skills", link: "#skills" },
+  { name: "Experience", link: "#experience" },
+  { name: "Projects", link: "#projects" },
+  { name: "Certifications", link: "#certifications" },
+  { name: "Contact", link: "#contact" },
+];
 
-    // },
-    {
-      id: 3,
-      img: "/link.svg",
-      link: "https://www.linkedin.com/in/hadi-nour-eddine/", 
+export const personalInfo = {
+  name: "Hadi Noureddine",
+  title: "Software Engineer",
+  tagline: "Building Scalable Cloud Solutions",
+  bio: "AWS Certified Software Engineer specializing in enterprise-level backend systems, cloud architecture, and full-stack development. Passionate about building scalable, secure, and high-performance applications that solve real-world problems.",
+  location: "Beirut, Lebanon",
+  email: "hadi.noureddine.9@gmail.com",
+  phone: "+96171422892",
+  linkedin: "https://www.linkedin.com/in/hadi-nour-eddine",
+  github: "https://github.com/HadiNoureddine9",
+  resumeUrl: "/resume.pdf",
+};
 
-    },
-  ];
+export const skills = {
+  backend: [
+    { name: "Node.js", icon: "/icons/nodejs.svg", proficiency: 90 },
+    { name: "Express.js", icon: "/icons/express.svg", proficiency: 90 },
+    { name: "Java", icon: "/icons/java.svg", proficiency: 80 },
+    { name: "Spring Boot", icon: "/icons/spring.svg", proficiency: 80 },
+    { name: "Python", icon: "/icons/python.svg", proficiency: 85 },
+    { name: "Django", icon: "/icons/django.svg", proficiency: 80 },
+    { name: "PHP", icon: "/icons/php.svg", proficiency: 75 },
+  ],
+  frontend: [
+    { name: "React.js", icon: "/re.svg", proficiency: 90 },
+    { name: "TypeScript", icon: "/ts.svg", proficiency: 85 },
+    { name: "JavaScript", icon: "/icons/js.svg", proficiency: 90 },
+    { name: "Next.js", icon: "/next.svg", proficiency: 85 },
+    { name: "Tailwind CSS", icon: "/tail.svg", proficiency: 90 },
+  ],
+  cloud: [
+    { name: "AWS Lambda", icon: "/icons/aws.svg", proficiency: 90 },
+    { name: "AWS Cognito", icon: "/icons/aws.svg", proficiency: 85 },
+    { name: "AWS S3", icon: "/icons/aws.svg", proficiency: 90 },
+    { name: "CloudFormation", icon: "/icons/aws.svg", proficiency: 85 },
+    { name: "Route 53", icon: "/icons/aws.svg", proficiency: 80 },
+    { name: "CodePipeline", icon: "/icons/aws.svg", proficiency: 85 },
+    { name: "Docker", icon: "/icons/docker.svg", proficiency: 80 },
+  ],
+  databases: [
+    { name: "MySQL", icon: "/icons/mysql.svg", proficiency: 85 },
+    { name: "MongoDB", icon: "/icons/mongodb.svg", proficiency: 85 },
+    { name: "PostgreSQL", icon: "/icons/postgresql.svg", proficiency: 80 },
+  ],
+  tools: [
+    { name: "Git", icon: "/git.svg", proficiency: 90 },
+    { name: "Jira", icon: "/icons/jira.svg", proficiency: 85 },
+    { name: "n8n", icon: "/icons/n8n.svg", proficiency: 75 },
+  ],
+};
+
+export const certifications = [
+  {
+    id: 1,
+    name: "AWS Solutions Architect Associate",
+    issuer: "Amazon Web Services",
+    date: "August 2025",
+    credlyUrl: "https://www.credly.com/badges/b8d15743-27d4-4a81-a2d5-fcc34695b406/public_url",
+    image: "/certifications/aws-saa.png",
+  },
+  {
+    id: 2,
+    name: "AWS Developer Associate",
+    issuer: "Amazon Web Services",
+    date: "September 2025",
+    credlyUrl: "https://www.credly.com/badges/fbe7d778-e914-4e4c-89a9-688c0cfb4a17/public_url",
+    image: "/certifications/aws-dev.png",
+  },
+  {
+    id: 3,
+    name: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    date: "July 2024",
+    credlyUrl: "https://www.credly.com/badges/90d1a2a8-eda1-47d8-a6cf-3ecee207e1bd/public_url",
+    image: "/AWS CCP certification.png",
+  },
+  {
+    id: 4,
+    name: "AWS Academy Graduate – Cloud Foundations",
+    issuer: "Amazon Web Services",
+    date: "June 2023",
+    credlyUrl: "https://www.credly.com/badges/3fb1bec8-3e7f-429b-99be-4847468d754c/public_url",
+    image: "/certifications/aws-academy.png",
+  },
+  {
+    id: 5,
+    name: "Machine Learning Certificate",
+    issuer: "ZAKA AI",
+    date: "June 2025",
+    credlyUrl: "https://certificates.zaka.ai/8b8deff8-75aa-4e35-b4b8-283d96b39ede#acc.LFUPq1tA",
+    image: "/certifications/zaka-ml.png",
+  },
+];
+
+export const workExperience = [
+  {
+    id: 1,
+    company: "Darbuka",
+    role: "Software Engineer",
+    period: "November 2023 – Present",
+    location: "Remote",
+    description: "Led backend development of enterprise-level solutions using serverless architecture and AWS cloud services.",
+    achievements: [
+      "Developed enterprise-level backend services using Node.js (Express) and Serverless framework",
+      "Architected and managed AWS infrastructure (Lambda, S3, CloudFormation, Route 53), ensuring scalability, cost-efficiency, and security",
+      "Implemented Google Sign-In authentication with AWS Cognito for secure OAuth-based onboarding",
+      "Built dedicated development environment replicating production with CloudFormation & Route 53",
+      "Built CI/CD pipelines with AWS CodePipeline, accelerating deployments by 60%",
+      "Automated recruitment workflows using n8n, reducing manual screening time by 40%",
+    ],
+    technologies: ["Node.js", "Express", "AWS Lambda", "Serverless", "AWS Cognito", "CloudFormation", "n8n"],
+    thumbnail: "/exp4.svg",
+    className: "md:col-span-2",
+  },
+  {
+    id: 2,
+    company: "TecSolutions",
+    role: "Full Stack Developer",
+    period: "January 2023 – October 2023",
+    location: "Remote",
+    description: "Built full-stack applications with React and Java (Spring Boot), integrated AI solutions using PyTorch.",
+    achievements: [
+      "Built responsive frontends with React.js, improving usability and engagement",
+      "Designed RESTful APIs with Python (Django) and Java (Spring Boot), improving backend performance",
+      "Integrated AI solutions using PyTorch for a language translation application",
+      "Integrated third-party tools into existing systems using Python (Django)",
+    ],
+    technologies: ["React.js", "Java", "Spring Boot", "Python", "Django", "PyTorch", "MongoDB"],
+    thumbnail: "/exp2.svg",
+    className: "md:col-span-2",
+  },
+  {
+    id: 3,
+    company: "LogicsField (CloudLinks)",
+    role: "Software Engineer Internship",
+    period: "August 2022 – December 2023",
+    location: "Beirut, Lebanon",
+    description: "Developed features using PHP, Python, and React to deliver scalable full-stack solutions.",
+    achievements: [
+      "Designed and implemented features using PHP, Python and React to deliver scalable full-stack solutions",
+      "Applied OOP principles in PHP to build modular, reusable code",
+      "Assisted in API integration and database-driven application development",
+    ],
+    technologies: ["PHP", "Python", "React", "MySQL", "WordPress"],
+    thumbnail: "/exp1.svg",
+    className: "md:col-span-2",
+  },
+  {
+    id: 4,
+    company: "Freelance",
+    role: "Web Developer",
+    period: "2021 – Present",
+    location: "Remote",
+    description: "Full-stack web development from concept to deployment for various clients.",
+    achievements: [
+      "Web Development from initial concept to deployment",
+      "Custom WordPress themes and plugins",
+      "Responsive web applications using modern frameworks",
+    ],
+    technologies: ["React", "Node.js", "WordPress", "PHP", "MySQL"],
+    thumbnail: "/exp3.svg",
+    className: "md:col-span-2",
+  },
+];
+
+export const projects = [
+  {
+    id: 1,
+    title: "Enterprise Serverless Backend",
+    category: "Backend Development",
+    description: "Architected and deployed a scalable serverless backend for enterprise recruitment platform using AWS Lambda, API Gateway, and DynamoDB.",
+    problem: "Traditional server-based architecture couldn't handle variable traffic patterns efficiently, leading to high costs and scaling issues.",
+    solution: "Implemented serverless architecture with AWS Lambda functions, API Gateway for routing, and DynamoDB for data persistence. Integrated AWS Cognito for authentication.",
+    impact: "Reduced infrastructure costs by 70%, achieved 99.9% uptime, and enabled automatic scaling to handle 10x traffic spikes.",
+    role: "Lead Backend Engineer",
+    technologies: ["Node.js", "AWS Lambda", "API Gateway", "DynamoDB", "Cognito", "CloudFormation"],
+    image: "/projects/serverless-backend.png",
+    github: "",
+    demo: "",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "AI-Powered Translation App",
+    category: "Full Stack + AI",
+    description: "Built a language translation application with AI capabilities using PyTorch and React frontend.",
+    problem: "Existing translation tools lacked context-awareness and domain-specific accuracy.",
+    solution: "Developed custom ML models using PyTorch for context-aware translation, integrated with React frontend and Django backend.",
+    impact: "Achieved 25% better accuracy for technical translations compared to generic tools.",
+    role: "Full Stack Developer",
+    technologies: ["React", "Python", "Django", "PyTorch", "MongoDB"],
+    image: "/projects/translation-app.png",
+    github: "",
+    demo: "",
+    featured: true,
+  },
+  {
+    id: 3,
+    title: "Automated Recruitment Workflow",
+    category: "Automation",
+    description: "Designed and implemented automated recruitment screening system using n8n workflow automation.",
+    problem: "Manual candidate screening consumed 15+ hours per week for HR team.",
+    solution: "Built automated workflows using n8n to parse resumes, score candidates, and send automated responses.",
+    impact: "Reduced manual screening time by 40%, improved candidate response time by 80%.",
+    role: "Software Engineer",
+    technologies: ["n8n", "Node.js", "AWS Lambda", "S3"],
+    image: "/projects/recruitment-automation.png",
+    github: "",
+    demo: "",
+    featured: true,
+  },
+  {
+    id: 4,
+    title: "Portfolio Website",
+    category: "Frontend",
+    description: "Modern, responsive portfolio website built with Next.js, TypeScript, and Framer Motion.",
+    problem: "Need for a professional online presence to showcase skills and projects.",
+    solution: "Built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion for smooth animations.",
+    impact: "Achieved 95+ Lighthouse score, fully accessible, and optimized for SEO.",
+    role: "Full Stack Developer",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    image: "/projects/portfolio.png",
+    github: "https://github.com/HadiNoureddine9/HadiNoureddine",
+    demo: "https://hadinoureddine.com",
+    featured: false,
+  },
+];
+
+export const gridItems = [
+  {
+    id: 1,
+    title: "I prioritize collaboration and open communication with clients",
+    description: "",
+    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
+    imgClassName: "w-full h-full",
+    titleClassName: "justify-end",
+    img: "/b1.svg",
+    spareImg: "",
+  },
+  {
+    id: 2,
+    title: "Flexible with time zones and communication",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+    imgClassName: "",
+    titleClassName: "justify-start",
+    img: "",
+    spareImg: "",
+  },
+  {
+    id: 3,
+    title: "My tech stack",
+    description: "Constantly learning and improving",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+    imgClassName: "",
+    titleClassName: "justify-center",
+    img: "",
+    spareImg: "",
+  },
+  {
+    id: 4,
+    title: "Tech enthusiast with a passion for development",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
+    imgClassName: "",
+    titleClassName: "justify-start",
+    img: "/grid.svg",
+    spareImg: "/b4.svg",
+  },
+  {
+    id: 5,
+    title: "AWS Certified Solutions Architect",
+    description: "Cloud Architecture Expert",
+    className: "md:col-span-3 md:row-span-2",
+    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
+    titleClassName: "justify-center md:justify-start lg:justify-center",
+    img: "/AWS CCP certification.png",
+    spareImg: "/grid.svg",
+  },
+  {
+    id: 6,
+    title: "Ready to start your project?",
+    description: "",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
+    imgClassName: "",
+    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
+    img: "",
+    spareImg: "",
+  },
+];
+
+export const testimonials = [
+  {
+    quote: "Coming Soon",
+    name: "Satisfied Client",
+    title: "CEO",
+  },
+];
+
+export const companies = [
+  {
+    id: 1,
+    name: "Darbuka",
+    img: "/Darbuka.webp",
+    nameImg: "/Darbuka.webp",
+  },
+  {
+    id: 2,
+    name: "LogicsField",
+    img: "/logicsfield.svg",
+    nameImg: "/logicsfield-black.svg",
+  },
+];
+
+export const socialMedia = [
+  {
+    id: 1,
+    img: "/git.svg",
+    link: "https://github.com/HadiNoureddine9",
+    name: "GitHub",
+  },
+  {
+    id: 2,
+    img: "/link.svg",
+    link: "https://www.linkedin.com/in/hadi-nour-eddine/",
+    name: "LinkedIn",
+  },
+];

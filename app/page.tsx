@@ -1,10 +1,10 @@
-import Grid from "@/components/Grid";
+import About from "@/components/About";
 import Hero from "@/components/Hero";
 import RecentProjects from "@/components/RecentProjects";
+import Skills from "@/components/Skills";
+import Certifications from "@/components/Certifications";
 import { FloatingNav } from "@/components/ui/FloatingNav";
-import { FaHome } from "react-icons/fa";
 import { navItems } from "@/data";
-import Clients from "@/components/Clients";
 import Experience from "@/components/Experience";
 import Approach from "@/components/Approach";
 import Footer from "@/components/Footer";
@@ -16,13 +16,14 @@ export default function Home() {
       <div className="max-w-7xl w-full">
         <FloatingNav navItems={navItems} />
         <Hero />
-        <Grid />
-        {/* <RecentProjects />  */}
-        {/* <Clients /> */}
+        <About />
+        <Skills />
         <Experience />
+        <RecentProjects />
+        <Certifications />
         <Approach />
         <Footer />
       </div>
     </main>
   );
-};
+}

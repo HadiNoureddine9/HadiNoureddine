@@ -9,7 +9,6 @@ import { cn } from "@/utils/cn";
 
 
 import { BackgroundGradientAnimation } from "./GradiantBg";
-import GridGlobe from "./GridGlobe";
 import animationData from "@/data/confetti.json";
 import MagicButton from "./MagicButton";
 
@@ -135,8 +134,8 @@ export const BentoGridItem = ({
             {title}
           </div>
 
-          {/* for the github 3d globe */}
-          {id === 2 && <GridGlobe />}
+          {/* for the github 3d globe - temporarily disabled due to three-globe compatibility issue */}
+          {/* {id === 2 && <GridGlobe />} */}
 
           {/* Tech stack list div */}
           {id === 3 && (
