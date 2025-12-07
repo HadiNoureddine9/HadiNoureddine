@@ -1,6 +1,6 @@
 "use client";
 
-import { FaLocationArrow, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { FaLocationArrow, FaEnvelope, FaMapMarkerAlt, FaPhone, FaWhatsapp } from "react-icons/fa";
 import { socialMedia, personalInfo } from "@/data";
 import MagicButton from "./ui/MagicButton";
 import Link from 'next/link';
@@ -105,23 +105,29 @@ const Footer = () => {
         </motion.div>
 
         {/* Availability Status */}
-        <motion.div
+        <motion.a
+          href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}`}
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mb-12 px-6 py-4 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 backdrop-blur-sm"
+          className="mb-12 px-6 py-4 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 backdrop-blur-sm hover:bg-green-500/20 transition-all cursor-pointer inline-block"
         >
           <div className="flex items-center gap-3">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <span className="text-sm text-green-400 font-medium">
-              Currently available for new opportunities
+            <span className="text-sm text-green-400 font-medium flex items-center gap-2">
+              Let&apos;s Connect to Build Exceptional Engineering
+              <span className="w-1 h-1 rounded-full bg-green-500/50 mx-1" />
+              <FaWhatsapp className="text-lg" />
+              Chat with me on WhatsApp
             </span>
           </div>
-        </motion.div>
+        </motion.a>
       </div>
 
       {/* Footer Bottom */}

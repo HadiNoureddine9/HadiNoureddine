@@ -54,6 +54,24 @@ const Hero = () => {
     { name: "MongoDB", color: "from-green-500 to-teal-600", icon: "🍃" },
   ];
 
+  // Memoize particles to prevent re-generation during re-renders
+  const particles = React.useMemo(() => {
+    // Check if window is defined (for SSR safety)
+    const width = typeof window !== 'undefined' ? window.innerWidth : 1000;
+    const height = typeof window !== 'undefined' ? window.innerHeight : 1000;
+
+    return [...Array(20)].map((_, i) => ({
+      id: i,
+      left: Math.random() * 100 + '%',
+      top: Math.random() * 100 + '%',
+      duration: Math.random() * 10 + 10,
+      initialX: Math.random() * width,
+      initialY: Math.random() * height,
+      targetX: Math.random() * width,
+      targetY: Math.random() * height,
+    }));
+  }, []);
+
   return (
     <div className="pb-20 pt-36 relative min-h-screen flex items-center">
       {/* Enhanced Spotlight Effects */}
@@ -70,24 +88,24 @@ const Hero = () => {
 
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {mounted && [...Array(20)].map((_, i) => (
+        {mounted && particles.map((particle) => (
           <motion.div
-            key={i}
+            key={particle.id}
             className="absolute w-2 h-2 bg-purple/30 rounded-full"
             animate={{
-              x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
+              x: [particle.initialX, particle.targetX],
+              y: [particle.initialY, particle.targetY],
               scale: [1, 1.5, 1],
               opacity: [0.3, 0.8, 0.3],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: particle.duration,
               repeat: Infinity,
               ease: "linear"
             }}
             style={{
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
+              left: particle.left,
+              top: particle.top,
             }}
           />
         ))}

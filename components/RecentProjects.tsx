@@ -30,8 +30,8 @@ const RecentProjects = () => {
             key={cat}
             onClick={() => setFilter(cat)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === cat
-                ? "bg-purple text-white shadow-lg shadow-purple/[0.3]"
-                : "bg-black-200 text-white-200 border border-white/[0.1] hover:border-purple/[0.5]"
+              ? "bg-purple text-white shadow-lg shadow-purple/[0.3]"
+              : "bg-black-200 text-white-200 border border-white/[0.1] hover:border-purple/[0.5]"
               }`}
           >
             {cat === "all" ? "All Projects" : cat}
@@ -45,9 +45,10 @@ const RecentProjects = () => {
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative rounded-2xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all duration-300 overflow-hidden"
+            className="group relative rounded-2xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all duration-300 overflow-hidden opacity-0"
           >
             {/* Project Image Placeholder */}
             <div className="relative h-64 bg-gradient-to-br from-purple/[0.2] to-blue-500/[0.2] overflow-hidden">
