@@ -8,18 +8,20 @@ import { CosmicButtons } from './hero/CosmicButtons';
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black-100">
+    <div className="relative w-full min-h-screen overflow-hidden bg-black-100 flex flex-col">
       {/* Cosmic space background with nebulas */}
       <SpaceBackground />
 
       {/* 3D Network Mesh Sphere */}
       <NetworkSphere />
 
-      {/* Floating tech icon badges */}
-      <TechIcons />
+      {/* Floating tech icon badges - Hidden on mobile to prevent clutter */}
+      <div className="absolute inset-0 hidden md:block pointer-events-none">
+        <TechIcons />
+      </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto flex flex-col items-center justify-center h-full px-5 sm:px-10">
+      <div className="relative z-10 max-w-7xl w-full mx-auto flex flex-col items-center justify-center flex-grow px-5 sm:px-10">
         {/* Top label */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -37,9 +39,9 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, delay: 0.8 }}
-          className="mb-12 text-center"
+          className="mb-6 md:mb-12 text-center"
           style={{
-            fontSize: 'clamp(3rem, 10vw, 8rem)',
+            fontSize: 'clamp(2rem, 8vw, 8rem)',
             letterSpacing: '-0.02em',
             lineHeight: 1,
           }}
@@ -59,9 +61,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="max-w-3xl text-center mb-36"
+          className="max-w-3xl text-center mb-16 md:mb-36"
         >
-          <p className="text-white-100 text-base md:text-xl font-medium tracking-wide">
+          <p className="text-white-100 text-base md:text-xl font-medium tracking-wide px-4">
             Engineering scalable cloud infrastructure and distributed systems{' '}
             <span className="bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent">
               with architectural precision
@@ -70,7 +72,7 @@ const Hero = () => {
         </motion.div>
 
         {/* CTA Buttons */}
-        <div className="mt-32 md:mt-44">
+        <div className="mt-16 md:mt-44">
           <CosmicButtons />
         </div>
 
@@ -79,19 +81,19 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.8 }}
-          className="absolute bottom-12 left-0 right-0 flex justify-center gap-12 md:gap-24"
+          className="absolute bottom-6 md:bottom-12 left-0 right-0 flex justify-center gap-6 md:gap-24"
         >
           <div className="text-center">
-            <div className="text-2xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">10+</div>
-            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Years Experience</div>
+            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">10+</div>
+            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Years Exp.</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">50+</div>
-            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Projects Delivered</div>
+            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">50+</div>
+            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Projects</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">99.9%</div>
-            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Uptime SLA</div>
+            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">99.9%</div>
+            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Uptime</div>
           </div>
         </motion.div>
       </div>
@@ -101,7 +103,7 @@ const Hero = () => {
 
       {/* Large decorative star - bottom right */}
       <motion.div
-        className="absolute bottom-8 right-8 z-30 opacity-50 pointer-events-none"
+        className="hidden md:block absolute bottom-8 right-8 z-30 opacity-50 pointer-events-none"
         animate={{
           rotate: 360,
           opacity: [0.3, 0.6, 0.3],

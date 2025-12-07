@@ -206,8 +206,8 @@ export function NetworkSphere() {
             <motion.div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                 style={{
-                    width: '700px',
-                    height: '700px',
+                    width: 'min(700px, 100vw)',
+                    height: 'min(700px, 100vw)',
                     background: 'radial-gradient(circle, rgba(88, 28, 135, 0.18) 0%, rgba(23, 37, 84, 0.12) 50%, transparent 70%)',
                     filter: 'blur(80px)',
                 }}

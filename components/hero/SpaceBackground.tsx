@@ -164,7 +164,7 @@ export function SpaceBackground() {
 
             {/* Large decorative star - bottom right */}
             <motion.div
-                className="absolute bottom-12 right-12"
+                className="hidden md:block absolute bottom-12 right-12"
                 animate={{
                     rotate: 360,
                     opacity: [0.4, 0.8, 0.4],
