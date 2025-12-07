@@ -1,25 +1,23 @@
-"use client";
+import { motion } from 'motion/react';
+import { SpaceBackground } from './SpaceBackground';
+import { NetworkSphere } from './NetworkSphere';
+import { TechIcons } from './TechIcons';
+import { CosmicButtons } from './CosmicButtons';
 
-import { motion } from 'framer-motion';
-import { SpaceBackground } from './hero/SpaceBackground';
-import { NetworkSphere } from './hero/NetworkSphere';
-import { TechIcons } from './hero/TechIcons';
-import { CosmicButtons } from './hero/CosmicButtons';
-
-const Hero = () => {
+export function CosmicHero() {
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black-100">
+    <div className="relative w-full h-screen overflow-hidden bg-[#000319]">
       {/* Cosmic space background with nebulas */}
       <SpaceBackground />
-
+      
       {/* 3D Network Mesh Sphere */}
       <NetworkSphere />
-
+      
       {/* Floating tech icon badges */}
       <TechIcons />
-
+      
       {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto flex flex-col items-center justify-center h-full px-5 sm:px-10">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-8">
         {/* Top label */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -27,11 +25,11 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="mb-12"
         >
-          <div className="text-white-100 text-xs tracking-[0.3em] uppercase">
+          <div className="text-[#BEC1DD]/60 text-xs tracking-[0.3em] uppercase">
             Full-Stack Cloud Architect
           </div>
         </motion.div>
-
+        
         {/* Main Name - Massive gradient with 3D effect */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
@@ -39,21 +37,22 @@ const Hero = () => {
           transition={{ duration: 1.5, delay: 0.8 }}
           className="mb-12 text-center"
           style={{
-            fontSize: 'clamp(3rem, 10vw, 8rem)',
+            fontSize: 'clamp(3rem, 12vw, 9rem)',
+            fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
             letterSpacing: '-0.02em',
             lineHeight: 1,
           }}
         >
-          <span
-            className="block font-bold bg-gradient-to-b from-white via-purple to-blue-500 bg-clip-text text-transparent"
+          <span 
+            className="block bg-gradient-to-b from-white via-purple-900 to-blue-950 bg-clip-text text-transparent"
             style={{
-              filter: 'drop-shadow(0 0 40px rgba(203, 172, 249, 0.3)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5))',
+              filter: 'drop-shadow(0 0 40px rgba(88, 28, 135, 0.5)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5))',
             }}
           >
             Hadi Noureddine
           </span>
         </motion.h1>
-
+        
         {/* Subtitle */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,50 +60,47 @@ const Hero = () => {
           transition={{ duration: 1, delay: 1.2 }}
           className="max-w-3xl text-center mb-36"
         >
-          <p className="text-white-100 text-base md:text-xl font-medium tracking-wide">
+          <p className="text-[#C1C2D3] text-base md:text-lg">
             Engineering scalable cloud infrastructure and distributed systems{' '}
-            <span className="bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-400 bg-clip-text text-transparent">
               with architectural precision
             </span>
           </p>
         </motion.div>
-
-        {/* CTA Buttons */}
-        <div className="mt-32 md:mt-44">
+        
+        {/* CTA Buttons - Moved lower with more margin */}
+        <div className="mt-20">
           <CosmicButtons />
         </div>
-
+        
         {/* Bottom Stats */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.8 }}
-          className="absolute bottom-12 left-0 right-0 flex justify-center gap-12 md:gap-24"
+          className="absolute bottom-12 left-0 right-0 flex justify-center gap-24"
         >
           <div className="text-center">
-            <div className="text-2xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">10+</div>
-            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Years Experience</div>
+            <div className="text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-400 bg-clip-text text-transparent">10+</div>
+            <div className="text-[10px] text-[#BEC1DD]/50 uppercase tracking-[0.2em]">Years Experience</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">50+</div>
-            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Projects Delivered</div>
+            <div className="text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-400 bg-clip-text text-transparent">50+</div>
+            <div className="text-[10px] text-[#BEC1DD]/50 uppercase tracking-[0.2em]">Projects Delivered</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">99.9%</div>
-            <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Uptime SLA</div>
+            <div className="text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple-900 via-blue-900 to-cyan-400 bg-clip-text text-transparent">99.9%</div>
+            <div className="text-[10px] text-[#BEC1DD]/50 uppercase tracking-[0.2em]">Uptime SLA</div>
           </div>
         </motion.div>
       </div>
-
-      {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black-100 to-transparent z-20 pointer-events-none" />
-
+      
       {/* Large decorative star - bottom right */}
       <motion.div
-        className="absolute bottom-8 right-8 z-30 opacity-50 pointer-events-none"
+        className="absolute bottom-8 right-8 z-30"
         animate={{
           rotate: 360,
-          opacity: [0.3, 0.6, 0.3],
+          opacity: [0.5, 1, 0.5],
         }}
         transition={{
           rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
@@ -124,6 +120,4 @@ const Hero = () => {
       </motion.div>
     </div>
   );
-};
-
-export default Hero;
+}

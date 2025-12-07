@@ -124,7 +124,6 @@ const Footer = () => {
               Let&apos;s Connect to Build Exceptional Engineering
               <span className="w-1 h-1 rounded-full bg-green-500/50 mx-1" />
               <FaWhatsapp className="text-lg" />
-              Chat with me on WhatsApp
             </span>
           </div>
         </motion.a>
