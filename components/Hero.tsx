@@ -1,12 +1,15 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { memo } from 'react';
 import { SpaceBackground } from './hero/SpaceBackground';
 import { NetworkSphere } from './hero/NetworkSphere';
 import { TechIcons } from './hero/TechIcons';
 import { CosmicButtons } from './hero/CosmicButtons';
 
-const Hero = () => {
+const Hero = memo(() => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black-100 flex flex-col">
       {/* Cosmic space background with nebulas */}
@@ -26,7 +29,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: prefersReducedMotion ? 0.3 : 1, delay: prefersReducedMotion ? 0 : 0.5 }}
           className="mb-12"
         >
           <div className="text-white-100 text-xs tracking-[0.3em] uppercase">
@@ -38,12 +41,13 @@ const Hero = () => {
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.8 }}
+          transition={{ duration: prefersReducedMotion ? 0.3 : 1.5, delay: prefersReducedMotion ? 0 : 0.8 }}
           className="mb-6 md:mb-12 text-center"
           style={{
             fontSize: 'clamp(2rem, 8vw, 8rem)',
             letterSpacing: '-0.02em',
             lineHeight: 1,
+            willChange: 'transform, opacity',
           }}
         >
           <span
@@ -60,7 +64,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
+          transition={{ duration: prefersReducedMotion ? 0.3 : 1, delay: prefersReducedMotion ? 0 : 1.2 }}
           className="max-w-3xl text-center mb-16 md:mb-36"
         >
           <p className="text-white-100 text-base md:text-xl font-medium tracking-wide px-4">
@@ -80,7 +84,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.8 }}
+          transition={{ duration: prefersReducedMotion ? 0.3 : 1, delay: prefersReducedMotion ? 0 : 1.8 }}
           className="absolute bottom-6 md:bottom-12 left-0 right-0 flex justify-center gap-6 md:gap-24"
         >
           <div className="text-center">
@@ -104,7 +108,8 @@ const Hero = () => {
       {/* Large decorative star - bottom right */}
       <motion.div
         className="hidden md:block absolute bottom-8 right-8 z-30 opacity-50 pointer-events-none"
-        animate={{
+        style={{ willChange: 'transform, opacity' }}
+        animate={prefersReducedMotion ? {} : {
           rotate: 360,
           opacity: [0.3, 0.6, 0.3],
         }}
@@ -126,6 +131,8 @@ const Hero = () => {
       </motion.div>
     </div>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

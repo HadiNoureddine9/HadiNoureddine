@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, memo, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaCode, FaAws, FaRocket, FaLightbulb, FaGraduationCap, FaTrophy } from 'react-icons/fa';
 
@@ -92,15 +92,21 @@ const About = () => {
     );
 };
 
-const SectionHeader = () => {
+const SectionHeader = memo(() => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
         >
@@ -113,19 +119,27 @@ const SectionHeader = () => {
             </p>
         </motion.div>
     );
-};
+});
 
-const HighlightCard = ({ item, index }: { item: any; index: number }) => {
+SectionHeader.displayName = 'SectionHeader';
+
+const HighlightCard = memo(({ item, index }: { item: any; index: number }) => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative p-6 rounded-2xl bg-black-200 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-300 overflow-hidden opacity-0"
+            className="group relative p-6 rounded-2xl bg-black-200 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-300 overflow-hidden"
         >
             <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
             <div className="relative z-10">
@@ -141,17 +155,25 @@ const HighlightCard = ({ item, index }: { item: any; index: number }) => {
             </div>
         </motion.div>
     );
-};
+});
 
-const JourneySection = ({ journey }: { journey: any[] }) => {
+HighlightCard.displayName = 'HighlightCard';
+
+const JourneySection = memo(({ journey }: { journey: any[] }) => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
             className="mb-16"
         >
@@ -166,19 +188,27 @@ const JourneySection = ({ journey }: { journey: any[] }) => {
             </div>
         </motion.div>
     );
-};
+});
 
-const JourneyCard = ({ item, index }: { item: any; index: number }) => {
+JourneySection.displayName = 'JourneySection';
+
+const JourneyCard = memo(({ item, index }: { item: any; index: number }) => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative p-6 rounded-xl bg-gradient-to-br from-black-200 to-black-100 border border-white/[0.1] hover:border-purple/[0.5] transition-all duration-300 opacity-0"
+            className="relative p-6 rounded-xl bg-gradient-to-br from-black-200 to-black-100 border border-white/[0.1] hover:border-purple/[0.5] transition-all duration-300"
         >
             <div className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-purple text-white text-sm font-bold">
                 {item.year}
@@ -194,17 +224,25 @@ const JourneyCard = ({ item, index }: { item: any; index: number }) => {
             </p>
         </motion.div>
     );
-};
+});
 
-const ValuesSection = ({ values }: { values: any[] }) => {
+JourneyCard.displayName = 'JourneyCard';
+
+const ValuesSection = memo(({ values }: { values: any[] }) => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
             className="p-8 rounded-2xl bg-gradient-to-br from-purple/[0.1] to-blue-500/[0.1] border border-purple/[0.3]"
         >
@@ -219,19 +257,27 @@ const ValuesSection = ({ values }: { values: any[] }) => {
             </div>
         </motion.div>
     );
-};
+});
 
-const ValueCard = ({ item, index }: { item: any; index: number }) => {
+ValuesSection.displayName = 'ValuesSection';
+
+const ValueCard = memo(({ item, index }: { item: any; index: number }) => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            animate={shouldAnimate ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
-            className="text-center opacity-0"
+            className="text-center"
         >
             <div className="text-3xl font-bold text-purple mb-2">
                 {item.value}
@@ -241,17 +287,25 @@ const ValueCard = ({ item, index }: { item: any; index: number }) => {
             </div>
         </motion.div>
     );
-};
+});
 
-const FunFact = () => {
+ValueCard.displayName = 'ValueCard';
+
+const FunFact = memo(() => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
             className="mt-12 text-center"
         >
@@ -266,6 +320,8 @@ const FunFact = () => {
             </div>
         </motion.div>
     );
-};
+});
+
+FunFact.displayName = 'FunFact';
 
 export default About;

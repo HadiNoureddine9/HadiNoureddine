@@ -1,18 +1,20 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { LuArrowRight, LuCalendar } from 'react-icons/lu';
 
 export function CosmicButtons() {
+    const prefersReducedMotion = useReducedMotion();
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5 }}
+            transition={{ duration: prefersReducedMotion ? 0.3 : 1, delay: prefersReducedMotion ? 0 : 1.5 }}
             className="flex flex-wrap gap-6 justify-center z-20"
         >
             {/* Primary CTA - Purple → Very Dark Blue gradient */}
             <motion.button
                 className="group relative px-8 py-4 overflow-hidden rounded-lg"
-                whileHover={{ scale: 1.05 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => {
                     const projectsSection = document.getElementById('projects');
@@ -26,21 +28,24 @@ export function CosmicButtons() {
                     className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-900 via-blue-900 to-blue-950"
                 />
 
-                {/* Animated shine */}
-                <motion.div
-                    className="absolute inset-0 rounded-lg"
-                    style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
-                    }}
-                    animate={{
-                        x: ['-200%', '200%'],
-                    }}
-                    transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: 'linear',
-                    }}
-                />
+                {/* Animated shine - only if motion not reduced */}
+                {!prefersReducedMotion && (
+                    <motion.div
+                        className="absolute inset-0 rounded-lg"
+                        style={{
+                            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+                            willChange: 'transform',
+                        }}
+                        animate={{
+                            x: ['-200%', '200%'],
+                        }}
+                        transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: 'linear',
+                        }}
+                    />
+                )}
 
                 {/* Hover glow - purple */}
                 <motion.div
@@ -63,7 +68,7 @@ export function CosmicButtons() {
             {/* Secondary CTA - Gradient border */}
             <motion.button
                 className="group relative px-8 py-4 overflow-hidden rounded-lg"
-                whileHover={{ scale: 1.05 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => {
                     const contactSection = document.getElementById('contact');

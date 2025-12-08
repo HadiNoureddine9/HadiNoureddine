@@ -61,15 +61,21 @@ const Skills = () => {
     );
 };
 
-const SkillCategory = ({ category, categoryIndex }: { category: any; categoryIndex: number }) => {
+const SkillCategory = React.memo(({ category, categoryIndex }: { category: any; categoryIndex: number }) => {
     const ref = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+    const shouldAnimate = isInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             className="relative p-6 rounded-2xl bg-black-200 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-300"
         >
@@ -96,11 +102,20 @@ const SkillCategory = ({ category, categoryIndex }: { category: any; categoryInd
             </div>
         </motion.div>
     );
-};
+});
 
-const SkillItem = ({ skill, gradient, delay, isParentInView }: { skill: any; gradient: string; delay: number; isParentInView: boolean }) => {
+SkillCategory.displayName = 'SkillCategory';
+
+const SkillItem = React.memo(({ skill, gradient, delay, isParentInView }: { skill: any; gradient: string; delay: number; isParentInView: boolean }) => {
     const barRef = useRef(null);
+    const hasAnimatedRef = useRef(false);
     const barInView = useInView(barRef, { once: true, amount: 0.1 });
+
+    // Only animate if parent is in view and bar is in view, and hasn't animated yet
+    const shouldAnimate = barInView && isParentInView && !hasAnimatedRef.current;
+    if (shouldAnimate) {
+        hasAnimatedRef.current = true;
+    }
 
     return (
         <div className="group">
@@ -122,7 +137,7 @@ const SkillItem = ({ skill, gradient, delay, isParentInView }: { skill: any; gra
             <div ref={barRef} className="w-full h-1.5 bg-white/[0.05] rounded-full overflow-hidden">
                 <motion.div
                     initial={{ width: 0 }}
-                    animate={barInView && isParentInView ? { width: `${skill.proficiency}%` } : { width: 0 }}
+                    animate={shouldAnimate ? { width: `${skill.proficiency}%` } : { width: 0 }}
                     transition={{ duration: 1, delay }}
                     className="h-full rounded-full"
                     style={{ background: gradient }}
@@ -130,6 +145,8 @@ const SkillItem = ({ skill, gradient, delay, isParentInView }: { skill: any; gra
             </div>
         </div>
     );
-};
+});
+
+SkillItem.displayName = 'SkillItem';
 
 export default Skills;

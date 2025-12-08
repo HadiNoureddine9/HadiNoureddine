@@ -53,31 +53,30 @@ const ExperienceLink = ({ item, index }: { item: any, index: number }) => {
   const [active, setActive] = React.useState(false);
 
   React.useEffect(() => {
-    const handleScroll = () => {
-      const element = document.getElementById(cardId);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        // Check if element is roughly in the center of the viewport or visible
-        if (rect.top >= 0 && rect.top <= window.innerHeight * 0.5) {
-          setActive(true);
-        } else if (rect.bottom < 0 || rect.top > window.innerHeight) {
-          setActive(false);
-        }
-        // De-activate if another later element becomes active? 
-        // Simple distinct logic: highlight if it's the "current" one in reading view
-        if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) {
-          setActive(true);
-        } else {
-          setActive(false);
-        }
+    const element = document.getElementById(cardId);
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+            setActive(true);
+          } else {
+            setActive(false);
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '-20% 0px -20% 0px',
       }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
     };
-
-    // Better Approach: Intersection Observer
-    // But let's stick to a scroll listener for simplicity or use framer-motion's viewport
-    // actually let's just make it simple.
-
-    // Let's rely on the ExperienceCard setting global state or just use useInView here if we had ref to card
   }, [cardId]);
 
   return (
@@ -100,19 +99,24 @@ const ExperienceLink = ({ item, index }: { item: any, index: number }) => {
   )
 }
 
-const ExperienceCard = ({ card, index }: { card: any; index: number }) => {
+const ExperienceCard = React.memo(({ card, index }: { card: any; index: number }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-20% 0px -20% 0px" });
+  const hasAnimatedRef = useRef(false);
+  const isInView = useInView(ref, { once: true, margin: "-20% 0px -20% 0px" });
+
+  const shouldAnimate = isInView && !hasAnimatedRef.current;
+  if (shouldAnimate) {
+    hasAnimatedRef.current = true;
+  }
 
   return (
     <motion.div
       id={`experience-card-${index}`}
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      className={`relative p-8 rounded-3xl border border-white/[0.1] bg-black-100/50 backdrop-blur-sm opacity-0
+      className={`relative p-8 rounded-3xl border border-white/[0.1] bg-black-100/50 backdrop-blur-sm
         transition-colors duration-500
         ${isInView ? "border-purple/[0.5] shadow-[0_0_30px_rgba(139,92,246,0.1)]" : "hover:border-white/[0.2]"}
       `}
@@ -165,6 +169,8 @@ const ExperienceCard = ({ card, index }: { card: any; index: number }) => {
       </div>
     </motion.div>
   );
-};
+});
+
+ExperienceCard.displayName = 'ExperienceCard';
 
 export default Experience;

@@ -1,8 +1,51 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useMemo } from 'react';
+
+// Deterministic random number generator based on seed
+// This ensures server and client render exactly the same output
+const random = (seed: number) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+};
 
 export function SpaceBackground() {
+    const prefersReducedMotion = useReducedMotion();
+    
+    const colors = useMemo(() => [
+        { glow: 'rgba(255, 255, 255, 0.8)', accent: 'rgba(255, 255, 255, 0.4)' },
+        { glow: 'rgba(88, 28, 135, 0.9)', accent: 'rgba(59, 7, 100, 0.6)' },
+        { glow: 'rgba(23, 37, 84, 0.9)', accent: 'rgba(15, 23, 42, 0.5)' },
+    ], []);
+
+    // Reduce stars count for better performance (from 100 to 40)
+    const smallStars = useMemo(() => {
+        return Array.from({ length: 40 }, (_, i) => {
+            const width = random(i * 13) < 0.7 ? '1px' : '2px';
+            const height = random(i * 17) < 0.7 ? '1px' : '2px';
+            const left = `${random(i * 23) * 100}%`;
+            const top = `${random(i * 29) * 100}%`;
+            const opacity = random(i * 31) * 0.7 + 0.3;
+            const duration = random(i * 37) * 3 + 2;
+            const delay = random(i * 41) * 2;
+            return { width, height, left, top, opacity, duration, delay, i };
+        });
+    }, []);
+
+    // Reduce larger stars (from 20 to 10)
+    const largeStars = useMemo(() => {
+        return Array.from({ length: 10 }, (_, i) => {
+            const colorIndex = i % 3;
+            const color = colors[colorIndex];
+            const left = `${random(i * 53) * 100}%`;
+            const top = `${random(i * 59) * 100}%`;
+            const duration = random(i * 61) * 4 + 3;
+            const delay = random(i * 67) * 3;
+            return { color, left, top, duration, delay, i };
+        });
+    }, [colors]);
+
     return (
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden" style={{ willChange: 'transform' }}>
             {/* Base gradient - portfolio colors */}
             <div
                 className="absolute inset-0"
@@ -29,8 +72,9 @@ export function SpaceBackground() {
                 style={{
                     background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 60%)',
                     filter: 'blur(100px)',
+                    willChange: 'transform, opacity',
                 }}
-                animate={{
+                animate={prefersReducedMotion ? {} : {
                     scale: [1, 1.1, 1],
                     opacity: [0.3, 0.5, 0.3],
                 }}
@@ -47,8 +91,9 @@ export function SpaceBackground() {
                 style={{
                     background: 'radial-gradient(circle at center, rgba(88, 28, 135, 0.3) 0%, rgba(59, 7, 100, 0.18) 30%, transparent 70%)',
                     filter: 'blur(120px)',
+                    willChange: 'transform, opacity',
                 }}
-                animate={{
+                animate={prefersReducedMotion ? {} : {
                     scale: [1, 1.2, 1],
                     opacity: [0.4, 0.6, 0.4],
                     x: [-50, 0, -50],
@@ -67,8 +112,9 @@ export function SpaceBackground() {
                 style={{
                     background: 'radial-gradient(circle at center, rgba(23, 37, 84, 0.3) 0%, rgba(15, 23, 42, 0.15) 30%, transparent 70%)',
                     filter: 'blur(130px)',
+                    willChange: 'transform, opacity',
                 }}
-                animate={{
+                animate={prefersReducedMotion ? {} : {
                     scale: [1, 1.15, 1],
                     opacity: [0.5, 0.7, 0.5],
                     x: [50, 0, 50],
@@ -87,8 +133,9 @@ export function SpaceBackground() {
                 style={{
                     background: 'radial-gradient(circle at center, rgba(88, 28, 135, 0.22) 0%, rgba(23, 37, 84, 0.15) 40%, transparent 70%)',
                     filter: 'blur(110px)',
+                    willChange: 'transform, opacity',
                 }}
-                animate={{
+                animate={prefersReducedMotion ? {} : {
                     scale: [1, 1.1, 1],
                     opacity: [0.3, 0.5, 0.3],
                     x: [0, 50, 0],
@@ -100,72 +147,66 @@ export function SpaceBackground() {
                 }}
             />
 
-            {/* Stars - small particles */}
-            {[...Array(100)].map((_, i) => (
+            {/* Stars - small particles - reduced count and optimized */}
+            {smallStars.map((star) => (
                 <motion.div
-                    key={i}
+                    key={star.i}
                     className="absolute rounded-full bg-white"
                     style={{
-                        width: Math.random() < 0.7 ? '1px' : '2px',
-                        height: Math.random() < 0.7 ? '1px' : '2px',
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        opacity: Math.random() * 0.7 + 0.3,
+                        width: star.width,
+                        height: star.height,
+                        left: star.left,
+                        top: star.top,
+                        opacity: star.opacity,
+                        willChange: 'opacity',
                     }}
-                    animate={{
-                        opacity: [Math.random() * 0.5 + 0.3, Math.random() * 0.8 + 0.4, Math.random() * 0.5 + 0.3],
+                    animate={prefersReducedMotion ? {} : {
+                        opacity: [star.opacity, random(star.i * 43) * 0.8 + 0.4, star.opacity],
                     }}
                     transition={{
-                        duration: Math.random() * 3 + 2,
+                        duration: star.duration,
                         repeat: Infinity,
                         ease: 'easeInOut',
-                        delay: Math.random() * 2,
+                        delay: star.delay,
                     }}
                 />
             ))}
 
-            {/* Larger stars with colored glows (white, purple, very dark blue) */}
-            {[...Array(20)].map((_, i) => {
-                const colors = [
-                    { glow: 'rgba(255, 255, 255, 0.8)', accent: 'rgba(255, 255, 255, 0.4)' },
-                    { glow: 'rgba(88, 28, 135, 0.9)', accent: 'rgba(59, 7, 100, 0.6)' },
-                    { glow: 'rgba(23, 37, 84, 0.9)', accent: 'rgba(15, 23, 42, 0.5)' },
-                ];
-                const color = colors[i % 3];
-
-                return (
-                    <motion.div
-                        key={`star-${i}`}
-                        className="absolute"
+            {/* Larger stars with colored glows - reduced count */}
+            {largeStars.map((star) => (
+                <motion.div
+                    key={`star-${star.i}`}
+                    className="absolute"
+                    style={{
+                        left: star.left,
+                        top: star.top,
+                        willChange: 'transform, opacity',
+                    }}
+                    animate={prefersReducedMotion ? {} : {
+                        opacity: [0.3, 0.8, 0.3],
+                        scale: [1, 1.3, 1],
+                    }}
+                    transition={{
+                        duration: star.duration,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: star.delay,
+                    }}
+                >
+                    <div
+                        className="w-2 h-2 rounded-full bg-white"
                         style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
+                            boxShadow: `0 0 8px ${star.color.glow}, 0 0 15px ${star.color.accent}`,
                         }}
-                        animate={{
-                            opacity: [0.3, 0.8, 0.3],
-                            scale: [1, 1.3, 1],
-                        }}
-                        transition={{
-                            duration: Math.random() * 4 + 3,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                            delay: Math.random() * 3,
-                        }}
-                    >
-                        <div
-                            className="w-2 h-2 rounded-full bg-white"
-                            style={{
-                                boxShadow: `0 0 8px ${color.glow}, 0 0 15px ${color.accent}`,
-                            }}
-                        />
-                    </motion.div>
-                );
-            })}
+                    />
+                </motion.div>
+            ))}
 
             {/* Large decorative star - bottom right */}
             <motion.div
                 className="hidden md:block absolute bottom-12 right-12"
-                animate={{
+                style={{ willChange: 'transform, opacity' }}
+                animate={prefersReducedMotion ? {} : {
                     rotate: 360,
                     opacity: [0.4, 0.8, 0.4],
                 }}

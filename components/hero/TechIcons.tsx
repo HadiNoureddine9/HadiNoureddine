@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useMemo } from 'react';
 import {
     LuCloud,
     LuDatabase,
@@ -23,13 +24,22 @@ const techIcons = [
 ];
 
 export function TechIcons() {
+    const prefersReducedMotion = useReducedMotion();
+    
+    // Memoize icon data to prevent re-renders
+    const icons = useMemo(() => techIcons, []);
+
     return (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {techIcons.map((item, index) => (
+            {icons.map((item, index) => (
                 <motion.div
                     key={index}
                     className="absolute"
-                    style={{ left: item.x, top: item.y }}
+                    style={{ 
+                        left: item.x, 
+                        top: item.y,
+                        willChange: 'transform, opacity',
+                    }}
                     initial={{ opacity: 0, scale: 0.3, y: 40 }}
                     animate={{
                         opacity: 0.9,
@@ -42,9 +52,10 @@ export function TechIcons() {
                         ease: 'easeOut',
                     }}
                 >
-                    {/* Floating animation */}
+                    {/* Floating animation - only if motion is not reduced */}
                     <motion.div
-                        animate={{
+                        style={{ willChange: 'transform' }}
+                        animate={prefersReducedMotion ? {} : {
                             y: [0, -12, 0],
                         }}
                         transition={{
