@@ -1,0 +1,1156 @@
+[1mdiff --git a/components/Footer.tsx b/components/Footer.tsx[m
+[1mindex 2e4b9ed..993245e 100644[m
+[1m--- a/components/Footer.tsx[m
+[1m+++ b/components/Footer.tsx[m
+[36m@@ -5,18 +5,22 @@[m [mimport { socialMedia, personalInfo } from "@/data";[m
+ import MagicButton from "./ui/MagicButton";[m
+ import Link from 'next/link';[m
+ import Image from "next/image";[m
+[31m-import { motion } from 'framer-motion';[m
+[32m+[m[32mimport { motion, useInView } from 'framer-motion';[m
+[32m+[m[32mimport { useRef } from 'react';[m
+ [m
+ const Footer = () => {[m
+[32m+[m[32m  const sectionRef = useRef(null);[m
+[32m+[m[32m  const sectionInView = useInView(sectionRef, { once: true });[m
+[32m+[m
+   return ([m
+     <footer className="w-full pb-10 mb-[100px] md:mb-5" id="contact">[m
+       {/* Main Contact Section */}[m
+       <div className="flex flex-col items-center">[m
+         <motion.div[m
+[32m+[m[32m          ref={sectionRef}[m
+           initial={{ opacity: 0, y: 20 }}[m
+[31m-          whileInView={{ opacity: 1, y: 0 }}[m
+[32m+[m[32m          animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}[m
+           transition={{ duration: 0.5 }}[m
+[31m-          viewport={{ once: true }}[m
+           className="text-center mb-12"[m
+         >[m
+           <h1 className="heading lg:max-w-[45vw] mb-6">[m
+[36m@@ -29,141 +33,177 @@[m [mconst Footer = () => {[m
+         </motion.div>[m
+ [m
+         {/* Enhanced CTAs */}[m
+[31m-        <motion.div[m
+[31m-          initial={{ opacity: 0, y: 20 }}[m
+[31m-          whileInView={{ opacity: 1, y: 0 }}[m
+[31m-          transition={{ duration: 0.5, delay: 0.2 }}[m
+[31m-          viewport={{ once: true }}[m
+[31m-          className="flex flex-col sm:flex-row gap-4 mb-12 w-full max-w-md justify-center"[m
+[31m-        >[m
+[31m-          <a href={`mailto:${personalInfo.email}`} className="flex-1">[m
+[31m-            <MagicButton[m
+[31m-              title="Let's get in touch"[m
+[31m-              icon={<FaLocationArrow />}[m
+[31m-              position="right"[m
+[31m-            />[m
+[31m-          </a>[m
+[31m-          <a[m
+[31m-            href={personalInfo.resumeUrl}[m
+[31m-            download[m
+[31m-            className="flex-1 relative inline-flex h-12 w-full md:mt-10 overflow-hidden rounded-lg p-[1px] focus:outline-none group"[m
+[31m-          >[m
+[31m-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />[m
+[31m-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl group-hover:bg-slate-900 transition-colors">[m
+[31m-              Download Resume[m
+[31m-            </span>[m
+[31m-          </a>[m
+[31m-        </motion.div>[m
+[32m+[m[32m        <FooterCTAs />[m
+ [m
+         {/* Contact Info Cards */}[m
+[31m-        <motion.div[m
+[31m-          initial={{ opacity: 0, y: 20 }}[m
+[31m-          whileInView={{ opacity: 1, y: 0 }}[m
+[31m-          transition={{ duration: 0.5, delay: 0.3 }}[m
+[31m-          viewport={{ once: true }}[m
+[31m-          className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-12"[m
+[31m-        >[m
+[31m-          <a[m
+[31m-            href={`mailto:${personalInfo.email}`}[m
+[31m-            className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all group"[m
+[31m-          >[m
+[31m-            <div className="w-12 h-12 rounded-lg bg-purple/[0.2] flex items-center justify-center group-hover:bg-purple/[0.3] transition-colors">[m
+[31m-              <FaEnvelope className="text-purple text-xl" />[m
+[31m-            </div>[m
+[31m-            <div className="flex-1 min-w-0">[m
+[31m-              <p className="text-xs text-white-200 mb-1">Email</p>[m
+[31m-              <p className="text-sm text-white-100 group-hover:text-purple transition-colors truncate">[m
+[31m-                {personalInfo.email}[m
+[31m-              </p>[m
+[31m-            </div>[m
+[31m-          </a>[m
+[31m-[m
+[31m-          <div className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1]">[m
+[31m-            <div className="w-12 h-12 rounded-lg bg-blue-500/[0.2] flex items-center justify-center">[m
+[31m-              <FaMapMarkerAlt className="text-blue-400 text-xl" />[m
+[31m-            </div>[m
+[31m-            <div>[m
+[31m-              <p className="text-xs text-white-200 mb-1">Location</p>[m
+[31m-              <p className="text-sm text-white-100">{personalInfo.location}</p>[m
+[31m-            </div>[m
+[31m-          </div>[m
+[31m-[m
+[31m-          <a[m
+[31m-            href={`tel:${personalInfo.phone}`}[m
+[31m-            className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all group"[m
+[31m-          >[m
+[31m-            <div className="w-12 h-12 rounded-lg bg-green-500/[0.2] flex items-center justify-center group-hover:bg-green-500/[0.3] transition-colors">[m
+[31m-              <FaPhone className="text-green-400 text-xl" />[m
+[31m-            </div>[m
+[31m-            <div>[m
+[31m-              <p className="text-xs text-white-200 mb-1">Phone</p>[m
+[31m-              <p className="text-sm text-white-100 group-hover:text-purple transition-colors">[m
+[31m-                {personalInfo.phone}[m
+[31m-              </p>[m
+[31m-            </div>[m
+[31m-          </a>[m
+[31m-        </motion.div>[m
+[32m+[m[32m        <ContactInfoCards />[m
+ [m
+         {/* Availability Status */}[m
+[31m-        <motion.a[m
+[31m-          href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}`}[m
+[31m-          target="_blank"[m
+[31m-          rel="noopener noreferrer"[m
+[31m-          initial={{ opacity: 0, y: 20 }}[m
+[31m-          whileInView={{ opacity: 1, y: 0 }}[m
+[31m-          transition={{ duration: 0.5, delay: 0.4 }}[m
+[31m-          viewport={{ once: true }}[m
+[31m-          className="mb-12 px-6 py-4 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 backdrop-blur-sm hover:bg-green-500/20 transition-all cursor-pointer inline-block"[m
+[31m-        >[m
+[31m-          <div className="flex items-center gap-3">[m
+[31m-            <span className="relative flex h-3 w-3">[m
+[31m-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>[m
+[31m-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>[m
+[31m-            </span>[m
+[31m-            <span className="text-sm text-green-400 font-medium flex items-center gap-2">[m
+[31m-              Let&apos;s Connect to Build Exceptional Engineering[m
+[31m-              <span className="w-1 h-1 rounded-full bg-green-500/50 mx-1" />[m
+[31m-              <FaWhatsapp className="text-lg" />[m
+[31m-            </span>[m
+[31m-          </div>[m
+[31m-        </motion.a>[m
+[32m+[m[32m        <AvailabilityStatus />[m
+       </div>[m
+ [m
+       {/* Footer Bottom */}[m
+[31m-      <motion.div[m
+[31m-        initial={{ opacity: 0 }}[m
+[31m-        whileInView={{ opacity: 1 }}[m
+[31m-        transition={{ duration: 0.5, delay: 0.5 }}[m
+[31m-        viewport={{ once: true }}[m
+[31m-        className="flex mt-16 md:flex-row flex-col justify-between items-center gap-6 border-t border-white/[0.1] pt-8"[m
+[32m+[m[32m      <FooterBottom />[m
+[32m+[m[32m    </footer>[m
+[32m+[m[32m  );[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mconst FooterCTAs = () => {[m
+[32m+[m[32m  const ref = useRef(null);[m
+[32m+[m[32m  const isInView = useInView(ref, { once: true });[m
+[32m+[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <motion.div[m
+[32m+[m[32m      ref={ref}[m
+[32m+[m[32m      initial={{ opacity: 0, y: 20 }}[m
+[32m+[m[32m      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}[m
+[32m+[m[32m      transition={{ duration: 0.5, delay: 0.2 }}[m
+[32m+[m[32m      className="flex flex-col sm:flex-row gap-4 mb-12 w-full max-w-md justify-center"[m
+[32m+[m[32m    >[m
+[32m+[m[32m      <a href={`mailto:${personalInfo.email}`} className="flex-1">[m
+[32m+[m[32m        <MagicButton[m
+[32m+[m[32m          title="Let's get in touch"[m
+[32m+[m[32m          icon={<FaLocationArrow />}[m
+[32m+[m[32m          position="right"[m
+[32m+[m[32m        />[m
+[32m+[m[32m      </a>[m
+[32m+[m[32m      <a[m
+[32m+[m[32m        href={personalInfo.resumeUrl}[m
+[32m+[m[32m        download[m
+[32m+[m[32m        className="flex-1 relative inline-flex h-12 w-full md:mt-10 overflow-hidden rounded-lg p-[1px] focus:outline-none group"[m
+       >[m
+[31m-        <div className="flex flex-col md:flex-row items-center gap-4">[m
+[31m-          <p className="md:text-base text-sm md:font-normal font-light text-white-200">[m
+[31m-            © 2025 Hadi Noureddine. All rights reserved.[m
+[32m+[m[32m        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />[m
+[32m+[m[32m        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl group-hover:bg-slate-900 transition-colors">[m
+[32m+[m[32m          Download Resume[m
+[32m+[m[32m        </span>[m
+[32m+[m[32m      </a>[m
+[32m+[m[32m    </motion.div>[m
+[32m+[m[32m  );[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mconst ContactInfoCards = () => {[m
+[32m+[m[32m  const ref = useRef(null);[m
+[32m+[m[32m  const isInView = useInView(ref, { once: true });[m
+[32m+[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <motion.div[m
+[32m+[m[32m      ref={ref}[m
+[32m+[m[32m      initial={{ opacity: 0, y: 20 }}[m
+[32m+[m[32m      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}[m
+[32m+[m[32m      transition={{ duration: 0.5, delay: 0.3 }}[m
+[32m+[m[32m      className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-12"[m
+[32m+[m[32m    >[m
+[32m+[m[32m      <a[m
+[32m+[m[32m        href={`mailto:${personalInfo.email}`}[m
+[32m+[m[32m        className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all group"[m
+[32m+[m[32m      >[m
+[32m+[m[32m        <div className="w-12 h-12 rounded-lg bg-purple/[0.2] flex items-center justify-center group-hover:bg-purple/[0.3] transition-colors">[m
+[32m+[m[32m          <FaEnvelope className="text-purple text-xl" />[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div className="flex-1 min-w-0">[m
+[32m+[m[32m          <p className="text-xs text-white-200 mb-1">Email</p>[m
+[32m+[m[32m          <p className="text-sm text-white-100 group-hover:text-purple transition-colors truncate">[m
+[32m+[m[32m            {personalInfo.email}[m
+           </p>[m
+[31m-          <div className="hidden md:block w-1 h-1 rounded-full bg-white-200" />[m
+[31m-          <p className="text-sm text-white-200">[m
+[31m-            Crafted with Next.js, TypeScript & Tailwind CSS[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </a>[m
+[32m+[m
+[32m+[m[32m      <div className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1]">[m
+[32m+[m[32m        <div className="w-12 h-12 rounded-lg bg-blue-500/[0.2] flex items-center justify-center">[m
+[32m+[m[32m          <FaMapMarkerAlt className="text-blue-400 text-xl" />[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div>[m
+[32m+[m[32m          <p className="text-xs text-white-200 mb-1">Location</p>[m
+[32m+[m[32m          <p className="text-sm text-white-100">{personalInfo.location}</p>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m      <a[m
+[32m+[m[32m        href={`tel:${personalInfo.phone}`}[m
+[32m+[m[32m        className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all group"[m
+[32m+[m[32m      >[m
+[32m+[m[32m        <div className="w-12 h-12 rounded-lg bg-green-500/[0.2] flex items-center justify-center group-hover:bg-green-500/[0.3] transition-colors">[m
+[32m+[m[32m          <FaPhone className="text-green-400 text-xl" />[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div>[m
+[32m+[m[32m          <p className="text-xs text-white-200 mb-1">Phone</p>[m
+[32m+[m[32m          <p className="text-sm text-white-100 group-hover:text-purple transition-colors">[m
+[32m+[m[32m            {personalInfo.phone}[m
+           </p>[m
+         </div>[m
+[32m+[m[32m      </a>[m
+[32m+[m[32m    </motion.div>[m
+[32m+[m[32m  );[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mconst AvailabilityStatus = () => {[m
+[32m+[m[32m  const ref = useRef(null);[m
+[32m+[m[32m  const isInView = useInView(ref, { once: true });[m
+[32m+[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <motion.a[m
+[32m+[m[32m      ref={ref}[m
+[32m+[m[32m      href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}`}[m
+[32m+[m[32m      target="_blank"[m
+[32m+[m[32m      rel="noopener noreferrer"[m
+[32m+[m[32m      initial={{ opacity: 0, y: 20 }}[m
+[32m+[m[32m      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}[m
+[32m+[m[32m      transition={{ duration: 0.5, delay: 0.4 }}[m
+[32m+[m[32m      className="mb-12 px-6 py-4 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 backdrop-blur-sm hover:bg-green-500/20 transition-all cursor-pointer inline-block"[m
+[32m+[m[32m    >[m
+[32m+[m[32m      <div className="flex items-center gap-3">[m
+[32m+[m[32m        <span className="relative flex h-3 w-3">[m
+[32m+[m[32m          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>[m
+[32m+[m[32m          <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>[m
+[32m+[m[32m        </span>[m
+[32m+[m[32m        <span className="text-sm text-green-400 font-medium flex items-center gap-2">[m
+[32m+[m[32m          Let&apos;s Connect to Build Exceptional Engineering[m
+[32m+[m[32m          <span className="w-1 h-1 rounded-full bg-green-500/50 mx-1" />[m
+[32m+[m[32m          <FaWhatsapp className="text-lg" />[m
+[32m+[m[32m        </span>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </motion.a>[m
+[32m+[m[32m  );[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mconst FooterBottom = () => {[m
+[32m+[m[32m  const ref = useRef(null);[m
+[32m+[m[32m  const isInView = useInView(ref, { once: true });[m
+ [m
+[31m-        {/* Social Links */}[m
+[31m-        <div className="flex items-center gap-4">[m
+[31m-          <p className="text-sm text-white-200 hidden md:block">Connect:</p>[m
+[31m-          <div className="flex items-center gap-3">[m
+[31m-            {socialMedia.map((info) => ([m
+[31m-              <Link key={info.id} href={info.link} target="_blank" rel="noopener noreferrer">[m
+[31m-                <motion.div[m
+[31m-                  whileHover={{ scale: 1.1, y: -2 }}[m
+[31m-                  className="w-12 h-12 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300 hover:border-purple/[0.5] transition-all"[m
+[31m-                >[m
+[31m-                  <Image src={info.img} alt={info.name} width={24} height={24} />[m
+[31m-                </motion.div>[m
+[31m-              </Link>[m
+[31m-            ))}[m
+[31m-          </div>[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <motion.div[m
+[32m+[m[32m      ref={ref}[m
+[32m+[m[32m      initial={{ opacity: 0 }}[m
+[32m+[m[32m      animate={isInView ? { opacity: 1 } : { opacity: 0 }}[m
+[32m+[m[32m      transition={{ duration: 0.5, delay: 0.5 }}[m
+[32m+[m[32m      className="flex mt-16 md:flex-row flex-col justify-between items-center gap-6 border-t border-white/[0.1] pt-8"[m
+[32m+[m[32m    >[m
+[32m+[m[32m      <div className="flex flex-col md:flex-row items-center gap-4">[m
+[32m+[m[32m        <p className="md:text-base text-sm md:font-normal font-light text-white-200">[m
+[32m+[m[32m          © 2025 Hadi Noureddine. All rights reserved.[m
+[32m+[m[32m        </p>[m
+[32m+[m[32m        <div className="hidden md:block w-1 h-1 rounded-full bg-white-200" />[m
+[32m+[m[32m        <p className="text-sm text-white-200">[m
+[32m+[m[32m          Crafted with Next.js, TypeScript & Tailwind CSS[m
+[32m+[m[32m        </p>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m      {/* Social Links */}[m
+[32m+[m[32m      <div className="flex items-center gap-4">[m
+[32m+[m[32m        <p className="text-sm text-white-200 hidden md:block">Connect:</p>[m
+[32m+[m[32m        <div className="flex items-center gap-3">[m
+[32m+[m[32m          {socialMedia.map((info) => ([m
+[32m+[m[32m            <Link key={info.id} href={info.link} target="_blank" rel="noopener noreferrer">[m
+[32m+[m[32m              <motion.div[m
+[32m+[m[32m                whileHover={{ scale: 1.1, y: -2 }}[m
+[32m+[m[32m                className="w-12 h-12 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300 hover:border-purple/[0.5] transition-all"[m
+[32m+[m[32m              >[m
+[32m+[m[32m                <Image src={info.img} alt={info.name} width={24} height={24} />[m
+[32m+[m[32m              </motion.div>[m
+[32m+[m[32m            </Link>[m
+[32m+[m[32m          ))}[m
+         </div>[m
+[31m-      </motion.div>[m
+[32m+[m[32m      </div>[m
+ [m
+       {/* Mobile Quick Contact Bar */}[m
+       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-black-100/95 border-t border-white/[0.1] backdrop-blur-lg z-50">[m
+[36m@@ -195,8 +235,8 @@[m [mconst Footer = () => {[m
+           </a>[m
+         </div>[m
+       </div>[m
+[31m-    </footer>[m
+[32m+[m[32m    </motion.div>[m
+   );[m
+ };[m
+ [m
+[31m-export default Footer;[m
+\ No newline at end of file[m
+[32m+[m[32mexport default Footer;[m
+[1mdiff --git a/components/ui/GridGlobe.tsx b/components/ui/GridGlobe.tsx[m
+[1mindex 395c814..83f380c 100644[m
+[1m--- a/components/ui/GridGlobe.tsx[m
+[1m+++ b/components/ui/GridGlobe.tsx[m
+[36m@@ -1,5 +1,5 @@[m
+ "use client";[m
+[31m-import React from "react";[m
+[32m+[m[32mimport React, { useEffect, useState } from "react";[m
+ import { motion } from "framer-motion";[m
+ import dynamic from "next/dynamic";[m
+ [m
+[36m@@ -31,400 +31,378 @@[m [mconst GridGlobe = () => {[m
+     autoRotateSpeed: 0.5,[m
+   };[m
+   const colors = ["#06b6d4", "#3b82f6", "#6366f1"];[m
+[31m-  const sampleArcs = [[m
+[31m-    {[m
+[31m-      order: 1,[m
+[31m-      startLat: -19.885592,[m
+[31m-      startLng: -43.951191,[m
+[31m-      endLat: -22.9068,[m
+[31m-      endLng: -43.1729,[m
+[31m-      arcAlt: 0.1,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 1,[m
+[31m-      startLat: 28.6139,[m
+[31m-      startLng: 77.209,[m
+[31m-      endLat: 3.139,[m
+[31m-      endLng: 101.6869,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 1,[m
+[31m-      startLat: -19.885592,[m
+[31m-      startLng: -43.951191,[m
+[31m-      endLat: -1.303396,[m
+[31m-      endLng: 36.852443,[m
+[31m-      arcAlt: 0.5,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 2,[m
+[31m-      startLat: 1.3521,[m
+[31m-      startLng: 103.8198,[m
+[31m-      endLat: 35.6762,[m
+[31m-      endLng: 139.6503,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 2,[m
+[31m-      startLat: 51.5072,[m
+[31m-      startLng: -0.1276,[m
+[31m-      endLat: 3.139,[m
+[31m-      endLng: 101.6869,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 2,[m
+[31m-      startLat: -15.785493,[m
+[31m-      startLng: -47.909029,[m
+[31m-      endLat: 36.162809,[m
+[31m-      endLng: -115.119411,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 3,[m
+[31m-      startLat: -33.8688,[m
+[31m-      startLng: 151.2093,[m
+[31m-      endLat: 22.3193,[m
+[31m-      endLng: 114.1694,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 3,[m
+[31m-      startLat: 21.3099,[m
+[31m-      startLng: -157.8581,[m
+[31m-      endLat: 40.7128,[m
+[31m-      endLng: -74.006,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 3,[m
+[31m-      startLat: -6.2088,[m
+[31m-      startLng: 106.8456,[m
+[31m-      endLat: 51.5072,[m
+[31m-      endLng: -0.1276,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 4,[m
+[31m-      startLat: 11.986597,[m
+[31m-      startLng: 8.571831,[m
+[31m-      endLat: -15.595412,[m
+[31m-      endLng: -56.05918,[m
+[31m-      arcAlt: 0.5,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 4,[m
+[31m-      startLat: -34.6037,[m
+[31m-      startLng: -58.3816,[m
+[31m-      endLat: 22.3193,[m
+[31m-      endLng: 114.1694,[m
+[31m-      arcAlt: 0.7,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 4,[m
+[31m-      startLat: 51.5072,[m
+[31m-      startLng: -0.1276,[m
+[31m-      endLat: 48.8566,[m
+[31m-      endLng: -2.3522,[m
+[31m-      arcAlt: 0.1,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 5,[m
+[31m-      startLat: 14.5995,[m
+[31m-      startLng: 120.9842,[m
+[31m-      endLat: 51.5072,[m
+[31m-      endLng: -0.1276,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 5,[m
+[31m-      startLat: 1.3521,[m
+[31m-      startLng: 103.8198,[m
+[31m-      endLat: -33.8688,[m
+[31m-      endLng: 151.2093,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 5,[m
+[31m-      startLat: 34.0522,[m
+[31m-      startLng: -118.2437,[m
+[31m-      endLat: 48.8566,[m
+[31m-      endLng: -2.3522,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 6,[m
+[31m-      startLat: -15.432563,[m
+[31m-      startLng: 28.315853,[m
+[31m-      endLat: 1.094136,[m
+[31m-      endLng: -63.34546,[m
+[31m-      arcAlt: 0.7,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 6,[m
+[31m-      startLat: 37.5665,[m
+[31m-      startLng: 126.978,[m
+[31m-      endLat: 35.6762,[m
+[31m-      endLng: 139.6503,[m
+[31m-      arcAlt: 0.1,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 6,[m
+[31m-      startLat: 22.3193,[m
+[31m-      startLng: 114.1694,[m
+[31m-      endLat: 51.5072,[m
+[31m-      endLng: -0.1276,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 7,[m
+[31m-      startLat: -19.885592,[m
+[31m-      startLng: -43.951191,[m
+[31m-      endLat: -15.595412,[m
+[31m-      endLng: -56.05918,[m
+[31m-      arcAlt: 0.1,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 7,[m
+[31m-      startLat: 48.8566,[m
+[31m-      startLng: -2.3522,[m
+[31m-      endLat: 52.52,[m
+[31m-      endLng: 13.405,[m
+[31m-      arcAlt: 0.1,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 7,[m
+[31m-      startLat: 52.52,[m
+[31m-      startLng: 13.405,[m
+[31m-      endLat: 34.0522,[m
+[31m-      endLng: -118.2437,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 8,[m
+[31m-      startLat: -8.833221,[m
+[31m-      startLng: 13.264837,[m
+[31m-      endLat: -33.936138,[m
+[31m-      endLng: 18.436529,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 8,[m
+[31m-      startLat: 49.2827,[m
+[31m-      startLng: -123.1207,[m
+[31m-      endLat: 52.3676,[m
+[31m-      endLng: 4.9041,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 8,[m
+[31m-      startLat: 1.3521,[m
+[31m-      startLng: 103.8198,[m
+[31m-      endLat: 40.7128,[m
+[31m-      endLng: -74.006,[m
+[31m-      arcAlt: 0.5,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 9,[m
+[31m-      startLat: 51.5072,[m
+[31m-      startLng: -0.1276,[m
+[31m-      endLat: 34.0522,[m
+[31m-      endLng: -118.2437,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 9,[m
+[31m-      startLat: 22.3193,[m
+[31m-      startLng: 114.1694,[m
+[31m-      endLat: -22.9068,[m
+[31m-      endLng: -43.1729,[m
+[31m-      arcAlt: 0.7,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 9,[m
+[31m-      startLat: 1.3521,[m
+[31m-      startLng: 103.8198,[m
+[31m-      endLat: -34.6037,[m
+[31m-      endLng: -58.3816,[m
+[31m-      arcAlt: 0.5,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 10,[m
+[31m-      startLat: -22.9068,[m
+[31m-      startLng: -43.1729,[m
+[31m-      endLat: 28.6139,[m
+[31m-      endLng: 77.209,[m
+[31m-      arcAlt: 0.7,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 10,[m
+[31m-      startLat: 34.0522,[m
+[31m-      startLng: -118.2437,[m
+[31m-      endLat: 31.2304,[m
+[31m-      endLng: 121.4737,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 10,[m
+[31m-      startLat: -6.2088,[m
+[31m-      startLng: 106.8456,[m
+[31m-      endLat: 52.3676,[m
+[31m-      endLng: 4.9041,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 11,[m
+[31m-      startLat: 41.9028,[m
+[31m-      startLng: 12.4964,[m
+[31m-      endLat: 34.0522,[m
+[31m-      endLng: -118.2437,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 11,[m
+[31m-      startLat: -6.2088,[m
+[31m-      startLng: 106.8456,[m
+[31m-      endLat: 31.2304,[m
+[31m-      endLng: 121.4737,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 11,[m
+[31m-      startLat: 22.3193,[m
+[31m-      startLng: 114.1694,[m
+[31m-      endLat: 1.3521,[m
+[31m-      endLng: 103.8198,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 12,[m
+[31m-      startLat: 34.0522,[m
+[31m-      startLng: -118.2437,[m
+[31m-      endLat: 37.7749,[m
+[31m-      endLng: -122.4194,[m
+[31m-      arcAlt: 0.1,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 12,[m
+[31m-      startLat: 35.6762,[m
+[31m-      startLng: 139.6503,[m
+[31m-      endLat: 22.3193,[m
+[31m-      endLng: 114.1694,[m
+[31m-      arcAlt: 0.2,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 12,[m
+[31m-      startLat: 22.3193,[m
+[31m-      startLng: 114.1694,[m
+[31m-      endLat: 34.0522,[m
+[31m-      endLng: -118.2437,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 13,[m
+[31m-      startLat: 52.52,[m
+[31m-      startLng: 13.405,[m
+[31m-      endLat: 22.3193,[m
+[31m-      endLng: 114.1694,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 13,[m
+[31m-      startLat: 11.986597,[m
+[31m-      startLng: 8.571831,[m
+[31m-      endLat: 35.6762,[m
+[31m-      endLng: 139.6503,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 13,[m
+[31m-      startLat: -22.9068,[m
+[31m-      startLng: -43.1729,[m
+[31m-      endLat: -34.6037,[m
+[31m-      endLng: -58.3816,[m
+[31m-      arcAlt: 0.1,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-    {[m
+[31m-      order: 14,[m
+[31m-      startLat: -33.936138,[m
+[31m-      startLng: 18.436529,[m
+[31m-      endLat: 21.395643,[m
+[31m-      endLng: 39.883798,[m
+[31m-      arcAlt: 0.3,[m
+[31m-      color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[31m-    },[m
+[31m-  ];[m
+[32m+[m
+[32m+[m[32m  const [sampleArcs, setSampleArcs] = useState<any[]>([]);[m
+[32m+[m
+[32m+[m[32m  useEffect(() => {[m
+[32m+[m[32m    setSampleArcs([[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 1,[m
+[32m+[m[32m        startLat: -19.885592,[m
+[32m+[m[32m        startLng: -43.951191,[m
+[32m+[m[32m        endLat: -22.9068,[m
+[32m+[m[32m        endLng: -43.1729,[m
+[32m+[m[32m        arcAlt: 0.1,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 1,[m
+[32m+[m[32m        startLat: 28.6139,[m
+[32m+[m[32m        startLng: 77.209,[m
+[32m+[m[32m        endLat: 3.139,[m
+[32m+[m[32m        endLng: 101.6869,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 1,[m
+[32m+[m[32m        startLat: -19.885592,[m
+[32m+[m[32m        startLng: -43.951191,[m
+[32m+[m[32m        endLat: -1.303396,[m
+[32m+[m[32m        endLng: 36.852443,[m
+[32m+[m[32m        arcAlt: 0.5,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 2,[m
+[32m+[m[32m        startLat: 1.3521,[m
+[32m+[m[32m        startLng: 103.8198,[m
+[32m+[m[32m        endLat: 35.6762,[m
+[32m+[m[32m        endLng: 139.6503,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 2,[m
+[32m+[m[32m        startLat: 51.5072,[m
+[32m+[m[32m        startLng: -0.1276,[m
+[32m+[m[32m        endLat: 3.139,[m
+[32m+[m[32m        endLng: 101.6869,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 2,[m
+[32m+[m[32m        startLat: -15.785493,[m
+[32m+[m[32m        startLng: -47.909029,[m
+[32m+[m[32m        endLat: 36.162809,[m
+[32m+[m[32m        endLng: -115.119411,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 3,[m
+[32m+[m[32m        startLat: -33.8688,[m
+[32m+[m[32m        startLng: 151.2093,[m
+[32m+[m[32m        endLat: 22.3193,[m
+[32m+[m[32m        endLng: 114.1694,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 3,[m
+[32m+[m[32m        startLat: 21.3099,[m
+[32m+[m[32m        startLng: -157.8581,[m
+[32m+[m[32m        endLat: 40.7128,[m
+[32m+[m[32m        endLng: -74.006,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 3,[m
+[32m+[m[32m        startLat: -6.2088,[m
+[32m+[m[32m        startLng: 106.8456,[m
+[32m+[m[32m        endLat: 51.5072,[m
+[32m+[m[32m        endLng: -0.1276,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 4,[m
+[32m+[m[32m        startLat: 11.986597,[m
+[32m+[m[32m        startLng: 8.571831,[m
+[32m+[m[32m        endLat: -15.595412,[m
+[32m+[m[32m        endLng: -56.05918,[m
+[32m+[m[32m        arcAlt: 0.5,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 4,[m
+[32m+[m[32m        startLat: -34.6037,[m
+[32m+[m[32m        startLng: -58.3816,[m
+[32m+[m[32m        endLat: 22.3193,[m
+[32m+[m[32m        endLng: 114.1694,[m
+[32m+[m[32m        arcAlt: 0.7,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 4,[m
+[32m+[m[32m        startLat: 51.5072,[m
+[32m+[m[32m        startLng: -0.1276,[m
+[32m+[m[32m        endLat: 48.8566,[m
+[32m+[m[32m        endLng: -2.3522,[m
+[32m+[m[32m        arcAlt: 0.1,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 5,[m
+[32m+[m[32m        startLat: 14.5995,[m
+[32m+[m[32m        startLng: 120.9842,[m
+[32m+[m[32m        endLat: 51.5072,[m
+[32m+[m[32m        endLng: -0.1276,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 5,[m
+[32m+[m[32m        startLat: 1.3521,[m
+[32m+[m[32m        startLng: 103.8198,[m
+[32m+[m[32m        endLat: -33.8688,[m
+[32m+[m[32m        endLng: 151.2093,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 5,[m
+[32m+[m[32m        startLat: 34.0522,[m
+[32m+[m[32m        startLng: -118.2437,[m
+[32m+[m[32m        endLat: 48.8566,[m
+[32m+[m[32m        endLng: -2.3522,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 6,[m
+[32m+[m[32m        startLat: -15.432563,[m
+[32m+[m[32m        startLng: 28.315853,[m
+[32m+[m[32m        endLat: 1.094136,[m
+[32m+[m[32m        endLng: -63.34546,[m
+[32m+[m[32m        arcAlt: 0.7,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 6,[m
+[32m+[m[32m        startLat: 37.5665,[m
+[32m+[m[32m        startLng: 126.978,[m
+[32m+[m[32m        endLat: 35.6762,[m
+[32m+[m[32m        endLng: 139.6503,[m
+[32m+[m[32m        arcAlt: 0.1,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 6,[m
+[32m+[m[32m        startLat: 22.3193,[m
+[32m+[m[32m        startLng: 114.1694,[m
+[32m+[m[32m        endLat: 51.5072,[m
+[32m+[m[32m        endLng: -0.1276,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 7,[m
+[32m+[m[32m        startLat: -19.885592,[m
+[32m+[m[32m        startLng: -43.951191,[m
+[32m+[m[32m        endLat: -15.595412,[m
+[32m+[m[32m        endLng: -56.05918,[m
+[32m+[m[32m        arcAlt: 0.1,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 7,[m
+[32m+[m[32m        startLat: 48.8566,[m
+[32m+[m[32m        startLng: -2.3522,[m
+[32m+[m[32m        endLat: 52.52,[m
+[32m+[m[32m        endLng: 13.405,[m
+[32m+[m[32m        arcAlt: 0.1,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 7,[m
+[32m+[m[32m        startLat: 52.52,[m
+[32m+[m[32m        startLng: 13.405,[m
+[32m+[m[32m        endLat: 34.0522,[m
+[32m+[m[32m        endLng: -118.2437,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 8,[m
+[32m+[m[32m        startLat: -8.833221,[m
+[32m+[m[32m        startLng: 13.264837,[m
+[32m+[m[32m        endLat: -33.936138,[m
+[32m+[m[32m        endLng: 18.436529,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 8,[m
+[32m+[m[32m        startLat: 49.2827,[m
+[32m+[m[32m        startLng: -123.1207,[m
+[32m+[m[32m        endLat: 52.3676,[m
+[32m+[m[32m        endLng: 4.9041,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 8,[m
+[32m+[m[32m        startLat: 1.3521,[m
+[32m+[m[32m        startLng: 103.8198,[m
+[32m+[m[32m        endLat: 40.7128,[m
+[32m+[m[32m        endLng: -74.006,[m
+[32m+[m[32m        arcAlt: 0.5,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 9,[m
+[32m+[m[32m        startLat: 51.5072,[m
+[32m+[m[32m        startLng: -0.1276,[m
+[32m+[m[32m        endLat: 34.0522,[m
+[32m+[m[32m        endLng: -118.2437,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 9,[m
+[32m+[m[32m        startLat: 22.3193,[m
+[32m+[m[32m        startLng: 114.1694,[m
+[32m+[m[32m        endLat: -22.9068,[m
+[32m+[m[32m        endLng: -43.1729,[m
+[32m+[m[32m        arcAlt: 0.7,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 9,[m
+[32m+[m[32m        startLat: 1.3521,[m
+[32m+[m[32m        startLng: 103.8198,[m
+[32m+[m[32m        endLat: -34.6037,[m
+[32m+[m[32m        endLng: -58.3816,[m
+[32m+[m[32m        arcAlt: 0.5,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 10,[m
+[32m+[m[32m        startLat: -22.9068,[m
+[32m+[m[32m        startLng: -43.1729,[m
+[32m+[m[32m        endLat: 28.6139,[m
+[32m+[m[32m        endLng: 77.209,[m
+[32m+[m[32m        arcAlt: 0.7,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 10,[m
+[32m+[m[32m        startLat: 34.0522,[m
+[32m+[m[32m        startLng: -118.2437,[m
+[32m+[m[32m        endLat: 31.2304,[m
+[32m+[m[32m        endLng: 121.4737,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 10,[m
+[32m+[m[32m        startLat: -6.2088,[m
+[32m+[m[32m        startLng: 106.8456,[m
+[32m+[m[32m        endLat: 52.3676,[m
+[32m+[m[32m        endLng: 4.9041,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 11,[m
+[32m+[m[32m        startLat: 41.9028,[m
+[32m+[m[32m        startLng: 12.4964,[m
+[32m+[m[32m        endLat: 34.0522,[m
+[32m+[m[32m        endLng: -118.2437,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 11,[m
+[32m+[m[32m        startLat: -6.2088,[m
+[32m+[m[32m        startLng: 106.8456,[m
+[32m+[m[32m        endLat: 31.2304,[m
+[32m+[m[32m        endLng: 121.4737,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 11,[m
+[32m+[m[32m        startLat: 22.3193,[m
+[32m+[m[32m        startLng: 114.1694,[m
+[32m+[m[32m        endLat: 1.3521,[m
+[32m+[m[32m        endLng: 103.8198,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 12,[m
+[32m+[m[32m        startLat: 34.0522,[m
+[32m+[m[32m        startLng: -118.2437,[m
+[32m+[m[32m        endLat: 37.7749,[m
+[32m+[m[32m        endLng: -122.4194,[m
+[32m+[m[32m        arcAlt: 0.1,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 12,[m
+[32m+[m[32m        startLat: 35.6762,[m
+[32m+[m[32m        startLng: 139.6503,[m
+[32m+[m[32m        endLat: 22.3193,[m
+[32m+[m[32m        endLng: 114.1694,[m
+[32m+[m[32m        arcAlt: 0.2,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 12,[m
+[32m+[m[32m        startLat: 22.3193,[m
+[32m+[m[32m        startLng: 114.1694,[m
+[32m+[m[32m        endLat: 34.0522,[m
+[32m+[m[32m        endLng: -118.2437,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 13,[m
+[32m+[m[32m        startLat: 52.52,[m
+[32m+[m[32m        startLng: 13.405,[m
+[32m+[m[32m        endLat: 22.3193,[m
+[32m+[m[32m        endLng: 114.1694,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 13,[m
+[32m+[m[32m        startLat: 11.986597,[m
+[32m+[m[32m        startLng: 8.571831,[m
+[32m+[m[32m        endLat: 35.6762,[m
+[32m+[m[32m        endLng: 139.6503,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 13,[m
+[32m+[m[32m        startLat: -22.9068,[m
+[32m+[m[32m        startLng: -43.1729,[m
+[32m+[m[32m        endLat: -34.6037,[m
+[32m+[m[32m        endLng: -58.3816,[m
+[32m+[m[32m        arcAlt: 0.1,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m      {[m
+[32m+[m[32m        order: 14,[m
+[32m+[m[32m        startLat: -33.936138,[m
+[32m+[m[32m        startLng: 18.436529,[m
+[32m+[m[32m        endLat: 21.395643,[m
+[32m+[m[32m        endLng: 39.883798,[m
+[32m+[m[32m        arcAlt: 0.3,[m
+[32m+[m[32m        color: colors[Math.floor(Math.random() * (colors.length - 1))],[m
+[32m+[m[32m      },[m
+[32m+[m[32m    ]);[m
+[32m+[m[32m  }, []);[m
+ [m
+   return ([m
+[31m-    // remove dark:bg-black bg-white h-screen md:h-auto  w-full flex-row py-20[m
+[31m-    // change absolute -left-5 top-36, add w-full h-full md:top-40[m
+     <div className="flex items-center justify-center absolute -left-5 top-36 md:top-40 w-full h-full">[m
+[31m-      {/* remove h-full md:h-[40rem] */}[m
+       <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-96 px-4">[m
+[31m-        {/* remove these text divs */}[m
+[31m-        {/* <motion.div[m
+[31m-          initial={{[m
+[31m-            opacity: 0,[m
+[31m-            y: 20,[m
+[31m-          }}[m
+[31m-          animate={{[m
+[31m-            opacity: 1,[m
+[31m-            y: 0,[m
+[31m-          }}[m
+[31m-          transition={{[m
+[31m-            duration: 1,[m
+[31m-          }}[m
+[31m-          className="div"[m
+[31m-        >[m
+[31m-          <h2 className="text-center text-xl md:text-4xl font-bold text-black dark:text-white">[m
+[31m-            We sell soap worldwide[m
+[31m-          </h2>[m
+[31m-          <p className="text-center text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-md mt-2 mx-auto">[m
+[31m-            This globe is interactive and customizable. Have fun with it, and[m
+[31m-            don&apos;t forget to share it.[m
+[31m-          </p>[m
+[31m-        </motion.div> */}[m
+         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />[m
+[31m-        {/* remove -bottom-20 */}[m
+         <div className="absolute w-full h-72 md:h-full z-10">[m
+           <World data={sampleArcs} globeConfig={globeConfig} />[m
+         </div>[m
+[1mdiff --git a/components/ui/TextGenerateEffect.tsx b/components/ui/TextGenerateEffect.tsx[m
+[1mindex bd22d0b..1c16b52 100644[m
+[1m--- a/components/ui/TextGenerateEffect.tsx[m
+[1m+++ b/components/ui/TextGenerateEffect.tsx[m
+[36m@@ -1,5 +1,5 @@[m
+ "use client";[m
+[31m-import { useEffect } from "react";[m
+[32m+[m[32mimport { useEffect, useRef } from "react";[m
+ import { motion, stagger, useAnimate } from "framer-motion";[m
+ import { cn } from "../../utils/cn";[m
+ [m
+[36m@@ -15,8 +15,12 @@[m [mexport const TextGenerateEffect = ({[m
+   duration?: number;[m
+ }) => {[m
+   const [scope, animate] = useAnimate();[m
+[32m+[m[32m  const hasAnimated = useRef(false);[m
+   let wordsArray = words.split(" ");[m
+[32m+[m[41m  [m
+   useEffect(() => {[m
+[32m+[m[32m    if (hasAnimated.current) return;[m
+[32m+[m[41m    [m
+     animate([m
+       "span",[m
+       {[m
+[36m@@ -27,7 +31,9 @@[m [mexport const TextGenerateEffect = ({[m
+         duration: duration ? duration : 1,[m
+         delay: stagger(0.2),[m
+       }[m
+[31m-    );[m
+[32m+[m[32m    ).then(() => {[m
+[32m+[m[32m      hasAnimated.current = true;[m
+[32m+[m[32m    });[m
+   }, [animate, duration, filter]);[m
+ [m
+   const renderWords = () => {[m
