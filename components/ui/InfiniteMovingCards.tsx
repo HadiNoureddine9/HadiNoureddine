@@ -24,25 +24,25 @@ export const InfiniteMovingCards = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const hasInitialized = React.useRef(false);
 
   const [start, setStart] = useState(false);
 
   useEffect(() => {
-    function addAnimation() {
-      if (containerRef.current && scrollerRef.current) {
+    // Avoid duplicating children on React strict-mode double effects
+    function addAnimationOnce() {
+      if (!containerRef.current || !scrollerRef.current) return;
+      if (!hasInitialized.current) {
         const scrollerContent = Array.from(scrollerRef.current.children);
-
         scrollerContent.forEach((item) => {
           const duplicatedItem = item.cloneNode(true);
-          if (scrollerRef.current) {
-            scrollerRef.current.appendChild(duplicatedItem);
-          }
+          scrollerRef.current!.appendChild(duplicatedItem);
         });
-
-        getDirection();
-        getSpeed();
+        hasInitialized.current = true;
         setStart(true);
       }
+      getDirection();
+      getSpeed();
     }
     const getDirection = () => {
       if (containerRef.current) {
@@ -70,7 +70,7 @@ export const InfiniteMovingCards = ({
         }
       }
     };
-    addAnimation();
+    addAnimationOnce();
   }, [direction, speed]);
   return (
     <div

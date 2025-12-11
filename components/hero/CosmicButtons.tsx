@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { LuArrowRight, LuCalendar } from 'react-icons/lu';
+import { personalInfo } from '@/data';
 
 export function CosmicButtons() {
     const prefersReducedMotion = useReducedMotion();
@@ -12,16 +13,12 @@ export function CosmicButtons() {
             className="flex flex-wrap gap-6 justify-center z-20"
         >
             {/* Primary CTA - Purple → Very Dark Blue gradient */}
-            <motion.button
+            <motion.a
                 className="group relative px-8 py-4 overflow-hidden rounded-lg"
                 whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                    const projectsSection = document.getElementById('projects');
-                    if (projectsSection) {
-                        projectsSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }}
+                href={personalInfo.resumeUrl}
+                download
             >
                 {/* Gradient background: purple → very dark blue */}
                 <div
@@ -59,11 +56,11 @@ export function CosmicButtons() {
                 {/* Button content */}
                 <div className="relative flex items-center gap-3">
                     <span className="text-white tracking-wide text-sm">
-                        View Case Studies
+                        Download CV
                     </span>
                     <LuArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                 </div>
-            </motion.button>
+            </motion.a>
 
             {/* Secondary CTA - Gradient border */}
             <motion.button

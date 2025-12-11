@@ -1,6 +1,5 @@
 import About from "@/components/About";
 import Hero from "@/components/Hero";
-import RecentProjects from "@/components/RecentProjects";
 import Skills from "@/components/Skills";
 import Certifications from "@/components/Certifications";
 import { FloatingNav } from "@/components/ui/FloatingNav";
@@ -19,7 +18,6 @@ export default function Home() {
           <About />
           <Skills />
           <Experience />
-          <RecentProjects />
           <Certifications />
           <Approach />
           <Footer />

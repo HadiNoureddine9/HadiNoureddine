@@ -46,7 +46,7 @@ const Skills = () => {
                 </div>
                 <div className="text-center p-6 rounded-xl bg-black-200 border border-white/[0.1]">
                     <div className="text-3xl md:text-4xl font-bold text-purple mb-2">
-                        <AnimatedCounter value={3} suffix="+" />
+                        <AnimatedCounter value={4} suffix="+" />
                     </div>
                     <div className="text-sm text-white-200">Years Experience</div>
                 </div>
@@ -70,12 +70,15 @@ const SkillCategory = React.memo(({ category, categoryIndex }: { category: any; 
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, y: 0 }
+        : { opacity: 0, y: 20 };
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={animation}
             transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             className="relative p-6 rounded-2xl bg-black-200 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-300"
         >
@@ -116,6 +119,7 @@ const SkillItem = React.memo(({ skill, gradient, delay, isParentInView }: { skil
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animationWidth = (shouldAnimate || hasAnimatedRef.current) ? `${skill.proficiency}%` : 0;
 
     return (
         <div className="group">
@@ -137,7 +141,7 @@ const SkillItem = React.memo(({ skill, gradient, delay, isParentInView }: { skil
             <div ref={barRef} className="w-full h-1.5 bg-white/[0.05] rounded-full overflow-hidden">
                 <motion.div
                     initial={{ width: 0 }}
-                    animate={shouldAnimate ? { width: `${skill.proficiency}%` } : { width: 0 }}
+                    animate={{ width: animationWidth }}
                     transition={{ duration: 1, delay }}
                     className="h-full rounded-full"
                     style={{ background: gradient }}

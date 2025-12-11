@@ -8,6 +8,10 @@ const random = (seed: number) => {
     return x - Math.floor(x);
 };
 
+// Round numbers to stabilize SSR/CSR stringification (prevents hydration mismatches)
+const round = (value: number, decimals = 4) =>
+    Number(Math.round(Number(`${value}e${decimals}`)) + `e-${decimals}`);
+
 export function SpaceBackground() {
     const prefersReducedMotion = useReducedMotion();
     
@@ -22,9 +26,9 @@ export function SpaceBackground() {
         return Array.from({ length: 40 }, (_, i) => {
             const width = random(i * 13) < 0.7 ? '1px' : '2px';
             const height = random(i * 17) < 0.7 ? '1px' : '2px';
-            const left = `${random(i * 23) * 100}%`;
-            const top = `${random(i * 29) * 100}%`;
-            const opacity = random(i * 31) * 0.7 + 0.3;
+            const left = `${round(random(i * 23) * 100)}%`;
+            const top = `${round(random(i * 29) * 100)}%`;
+            const opacity = round(random(i * 31) * 0.7 + 0.3);
             const duration = random(i * 37) * 3 + 2;
             const delay = random(i * 41) * 2;
             return { width, height, left, top, opacity, duration, delay, i };
@@ -36,8 +40,8 @@ export function SpaceBackground() {
         return Array.from({ length: 10 }, (_, i) => {
             const colorIndex = i % 3;
             const color = colors[colorIndex];
-            const left = `${random(i * 53) * 100}%`;
-            const top = `${random(i * 59) * 100}%`;
+            const left = `${round(random(i * 53) * 100)}%`;
+            const top = `${round(random(i * 59) * 100)}%`;
             const duration = random(i * 61) * 4 + 3;
             const delay = random(i * 67) * 3;
             return { color, left, top, duration, delay, i };

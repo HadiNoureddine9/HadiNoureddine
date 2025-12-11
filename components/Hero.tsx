@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { memo } from 'react';
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { SpaceBackground } from './hero/SpaceBackground';
 import { NetworkSphere } from './hero/NetworkSphere';
 import { TechIcons } from './hero/TechIcons';
@@ -9,6 +9,25 @@ import { CosmicButtons } from './hero/CosmicButtons';
 
 const Hero = memo(() => {
   const prefersReducedMotion = useReducedMotion();
+  const titles = useMemo(
+    () => [
+      "Full-Stack Cloud Architect",
+      "Backend & API Engineer",
+      "AWS Solutions Engineer",
+      "Automation & AI Integrations",
+      "Applied ML Engineer",
+    ],
+    []
+  );
+  const [titleIndex, setTitleIndex] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const interval = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % titles.length);
+    }, 2600);
+    return () => clearInterval(interval);
+  }, [prefersReducedMotion, titles.length]);
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black-100 flex flex-col">
@@ -24,7 +43,7 @@ const Hero = memo(() => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto flex flex-col items-center justify-center flex-grow px-5 sm:px-10">
+      <div className="relative z-10 max-w-7xl w-full mx-auto flex flex-col items-center justify-center flex-grow px-5 sm:px-10 pb-24 md:pb-32">
         {/* Top label */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -32,8 +51,19 @@ const Hero = memo(() => {
           transition={{ duration: prefersReducedMotion ? 0.3 : 1, delay: prefersReducedMotion ? 0 : 0.5 }}
           className="mb-12"
         >
-          <div className="text-white-100 text-xs tracking-[0.3em] uppercase">
-            Full-Stack Cloud Architect
+          <div className="text-white-100 text-xs tracking-[0.3em] uppercase h-5 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={titles[titleIndex]}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4 }}
+                className="block"
+              >
+                {titles[titleIndex]}
+              </motion.span>
+            </AnimatePresence>
           </div>
         </motion.div>
 
@@ -44,7 +74,7 @@ const Hero = memo(() => {
           transition={{ duration: prefersReducedMotion ? 0.3 : 1.5, delay: prefersReducedMotion ? 0 : 0.8 }}
           className="mb-6 md:mb-12 text-center"
           style={{
-            fontSize: 'clamp(2rem, 8vw, 8rem)',
+            fontSize: 'clamp(1.75rem, 6vw, 6.5rem)',
             letterSpacing: '-0.02em',
             lineHeight: 1,
             willChange: 'transform, opacity',
@@ -67,7 +97,7 @@ const Hero = memo(() => {
           transition={{ duration: prefersReducedMotion ? 0.3 : 1, delay: prefersReducedMotion ? 0 : 1.2 }}
           className="max-w-3xl text-center mb-16 md:mb-36"
         >
-          <p className="text-white-100 text-base md:text-xl font-medium tracking-wide px-4">
+          <p className="text-white-100 text-sm md:text-lg font-medium tracking-wide px-4">
             Engineering scalable cloud infrastructure and distributed systems{' '}
             <span className="bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent">
               with architectural precision
@@ -76,7 +106,7 @@ const Hero = memo(() => {
         </motion.div>
 
         {/* CTA Buttons */}
-        <div className="mt-16 md:mt-44">
+        <div className="mt-16 md:mt-34 lg:mt-40">
           <CosmicButtons />
         </div>
 
@@ -85,18 +115,18 @@ const Hero = memo(() => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: prefersReducedMotion ? 0.3 : 1, delay: prefersReducedMotion ? 0 : 1.8 }}
-          className="absolute bottom-6 md:bottom-12 left-0 right-0 flex justify-center gap-6 md:gap-24"
+          className="absolute bottom-3 md:bottom-8 left-0 right-0 flex justify-center gap-6 md:gap-24"
         >
           <div className="text-center">
-            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">10+</div>
+            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">4+</div>
             <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Years Exp.</div>
           </div>
           <div className="text-center">
-            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">50+</div>
+            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">10+</div>
             <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Projects</div>
           </div>
           <div className="text-center">
-            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">99.9%</div>
+            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">99%</div>
             <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Uptime</div>
           </div>
         </motion.div>

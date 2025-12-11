@@ -1,6 +1,7 @@
 "use client";
 
-import { FaLocationArrow, FaEnvelope, FaMapMarkerAlt, FaPhone, FaWhatsapp } from "react-icons/fa";
+import { FaLocationArrow, FaWhatsapp } from "react-icons/fa";
+import { HiOutlineEnvelope, HiOutlineMapPin, HiOutlinePhone } from "react-icons/hi2";
 import { socialMedia, personalInfo } from "@/data";
 import MagicButton from "./ui/MagicButton";
 import Link from 'next/link';
@@ -62,7 +63,7 @@ const FooterCTAs = () => {
     >
       <a href={`mailto:${personalInfo.email}`} className="flex-1">
         <MagicButton
-          title="Let's get in touch"
+          title="Send me an email"
           icon={<FaLocationArrow />}
           position="right"
         />
@@ -98,7 +99,7 @@ const ContactInfoCards = () => {
         className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all group"
       >
         <div className="w-12 h-12 rounded-lg bg-purple/[0.2] flex items-center justify-center group-hover:bg-purple/[0.3] transition-colors">
-          <FaEnvelope className="text-purple text-xl" />
+          <HiOutlineEnvelope className="text-purple text-xl" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-xs text-white-200 mb-1">Email</p>
@@ -108,26 +109,26 @@ const ContactInfoCards = () => {
         </div>
       </a>
 
-      <div className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1]">
-        <div className="w-12 h-12 rounded-lg bg-blue-500/[0.2] flex items-center justify-center">
-          <FaMapMarkerAlt className="text-blue-400 text-xl" />
+      <div className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-blue-400/60 transition-all group">
+        <div className="w-12 h-12 rounded-lg bg-blue-500/[0.15] flex items-center justify-center group-hover:bg-blue-500/[0.25] transition-colors">
+          <HiOutlineMapPin className="text-blue-400 text-xl group-hover:text-blue-300 transition-colors" />
         </div>
-        <div>
-          <p className="text-xs text-white-200 mb-1">Location</p>
-          <p className="text-sm text-white-100">{personalInfo.location}</p>
+        <div className="transition-colors">
+          <p className="text-xs text-white-200 mb-1 group-hover:text-blue-200">Location</p>
+          <p className="text-sm text-white-100 group-hover:text-blue-100 transition-colors">{personalInfo.location}</p>
         </div>
       </div>
 
       <a
         href={`tel:${personalInfo.phone}`}
-        className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all group"
+        className="flex items-center gap-3 p-4 rounded-xl bg-black-200 border border-white/[0.1] hover:border-green-400/60 transition-all group"
       >
-        <div className="w-12 h-12 rounded-lg bg-green-500/[0.2] flex items-center justify-center group-hover:bg-green-500/[0.3] transition-colors">
-          <FaPhone className="text-green-400 text-xl" />
+        <div className="w-12 h-12 rounded-lg bg-green-500/[0.15] flex items-center justify-center group-hover:bg-green-500/[0.25] transition-colors">
+          <HiOutlinePhone className="text-green-400 text-xl group-hover:text-green-300 transition-colors" />
         </div>
-        <div>
-          <p className="text-xs text-white-200 mb-1">Phone</p>
-          <p className="text-sm text-white-100 group-hover:text-purple transition-colors">
+        <div className="transition-colors">
+          <p className="text-xs text-white-200 mb-1 group-hover:text-green-200">Phone</p>
+          <p className="text-sm text-white-100 group-hover:text-green-100 transition-colors">
             {personalInfo.phone}
           </p>
         </div>
@@ -182,10 +183,6 @@ const FooterBottom = () => {
         <p className="md:text-base text-sm md:font-normal font-light text-white-200">
           © 2025 Hadi Noureddine. All rights reserved.
         </p>
-        <div className="hidden md:block w-1 h-1 rounded-full bg-white-200" />
-        <p className="text-sm text-white-200">
-          Crafted with Next.js, TypeScript & Tailwind CSS
-        </p>
       </div>
 
       {/* Social Links */}
@@ -212,7 +209,7 @@ const FooterBottom = () => {
             href={`mailto:${personalInfo.email}`}
             className="flex flex-col items-center gap-1 text-white-200 hover:text-purple transition-colors"
           >
-            <FaEnvelope className="text-xl" />
+            <HiOutlineEnvelope className="text-xl" />
             <span className="text-xs">Email</span>
           </a>
           <a

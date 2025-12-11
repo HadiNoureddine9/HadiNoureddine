@@ -2,7 +2,6 @@ export const navItems = [
   { name: "About", link: "#about" },
   { name: "Skills", link: "#skills" },
   { name: "Experience", link: "#experience" },
-  { name: "Projects", link: "#projects" },
   { name: "Certifications", link: "#certifications" },
   { name: "Contact", link: "#contact" },
 ];
@@ -17,7 +16,7 @@ export const personalInfo = {
   phone: "+96171422892",
   linkedin: "https://www.linkedin.com/in/hadi-nour-eddine",
   github: "https://github.com/HadiNoureddine9",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/hadi-noureddine-CV.pdf",
 };
 
 export const skills = {
@@ -235,91 +234,7 @@ export const projects = [
   },
 ];
 
-export const gridItems = [
-  {
-    id: 1,
-    title: "I prioritize collaboration and open communication with clients",
-    description: "",
-    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
-    imgClassName: "w-full h-full",
-    titleClassName: "justify-end",
-    img: "/b1.svg",
-    spareImg: "",
-  },
-  {
-    id: 2,
-    title: "Flexible with time zones and communication",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "",
-    spareImg: "",
-  },
-  {
-    id: 3,
-    title: "My tech stack",
-    description: "Constantly learning and improving",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-center",
-    img: "",
-    spareImg: "",
-  },
-  {
-    id: 4,
-    title: "Tech enthusiast with a passion for development",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "/grid.svg",
-    spareImg: "/b4.svg",
-  },
-  {
-    id: 5,
-    title: "AWS Certified Solutions Architect",
-    description: "Cloud Architecture Expert",
-    className: "md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
-    titleClassName: "justify-center md:justify-start lg:justify-center",
-    img: "/AWS CCP certification.png",
-    spareImg: "/grid.svg",
-  },
-  {
-    id: 6,
-    title: "Ready to start your project?",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
-    img: "",
-    spareImg: "",
-  },
-];
-
-export const testimonials = [
-  {
-    quote: "Coming Soon",
-    name: "Satisfied Client",
-    title: "CEO",
-  },
-];
-
-export const companies = [
-  {
-    id: 1,
-    name: "Darbuka",
-    img: "/Darbuka.webp",
-    nameImg: "/Darbuka.webp",
-  },
-  {
-    id: 2,
-    name: "LogicsField",
-    img: "/logicsfield.svg",
-    nameImg: "/logicsfield-black.svg",
-  },
-];
+// Removed unused gridItems/testimonials/companies previously used only by unused components
 
 export const socialMedia = [
   {

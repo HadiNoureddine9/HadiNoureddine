@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import {
     LuCloud,
     LuDatabase,
-    LuChartBar,
+    LuBarChart3,
     LuClock,
     LuVideo,
     LuGitBranch,
@@ -12,12 +12,12 @@ import {
 } from 'react-icons/lu';
 
 const techIcons = [
-    { Icon: LuCloud, label: 'AWS', x: '12%', y: '48%', delay: 0 },
-    { Icon: LuChartBar, label: 'Tableau', x: '18%', y: '56%', delay: 0.1 },
-    { Icon: LuCloud, label: 'AWS', x: '26%', y: '62%', delay: 0.2 },
-    { Icon: LuClock, label: 'Terraform', x: '38%', y: '66%', delay: 0.3 },
-    { Icon: LuChartBar, label: 'Analytics', x: '50%', y: '68%', delay: 0.4 },
-    { Icon: LuVideo, label: 'Docker', x: '62%', y: '66%', delay: 0.5 },
+    { Icon: LuCloud, label: 'AWS Cloud', x: '12%', y: '48%', delay: 0 },
+    { Icon: LuBarChart3, label: 'Serverless', x: '18%', y: '56%', delay: 0.1 },
+    { Icon: LuCloud, label: 'React.js', x: '26%', y: '62%', delay: 0.2 },
+    { Icon: LuClock, label: 'Python', x: '38%', y: '66%', delay: 0.3 },
+    { Icon: LuBarChart3, label: 'Node.js', x: '50%', y: '68%', delay: 0.4 },
+    { Icon: LuVideo, label: 'Java', x: '62%', y: '66%', delay: 0.5 },
     { Icon: LuDatabase, label: 'Docker', x: '74%', y: '62%', delay: 0.6 },
     { Icon: LuActivity, label: 'Git', x: '82%', y: '56%', delay: 0.7 },
     { Icon: LuGitBranch, label: 'CI/CD', x: '88%', y: '48%', delay: 0.8 },

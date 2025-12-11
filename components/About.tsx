@@ -101,12 +101,15 @@ const SectionHeader = memo(() => {
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, y: 0 }
+        : { opacity: 0, y: 20 };
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={animation}
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
         >
@@ -132,12 +135,15 @@ const HighlightCard = memo(({ item, index }: { item: any; index: number }) => {
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, y: 0 }
+        : { opacity: 0, y: 20 };
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={animation}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="group relative p-6 rounded-2xl bg-black-200 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-300 overflow-hidden"
         >
@@ -168,12 +174,15 @@ const JourneySection = memo(({ journey }: { journey: any[] }) => {
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, y: 0 }
+        : { opacity: 0, y: 20 };
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={animation}
             transition={{ duration: 0.5 }}
             className="mb-16"
         >
@@ -201,12 +210,15 @@ const JourneyCard = memo(({ item, index }: { item: any; index: number }) => {
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, y: 0 }
+        : { opacity: 0, y: 20 };
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={animation}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="relative p-6 rounded-xl bg-gradient-to-br from-black-200 to-black-100 border border-white/[0.1] hover:border-purple/[0.5] transition-all duration-300"
         >
@@ -237,6 +249,9 @@ const ValuesSection = memo(({ values }: { values: any[] }) => {
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, scale: 1 }
+        : { opacity: 0, scale: 0.8 };
 
     return (
         <motion.div
@@ -270,12 +285,15 @@ const ValueCard = memo(({ item, index }: { item: any; index: number }) => {
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, scale: 1 }
+        : { opacity: 0, scale: 0.8 };
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={shouldAnimate ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            animate={animation}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             className="text-center"
         >
@@ -300,12 +318,15 @@ const FunFact = memo(() => {
     if (shouldAnimate) {
         hasAnimatedRef.current = true;
     }
+    const animation = (shouldAnimate || hasAnimatedRef.current)
+        ? { opacity: 1, y: 0 }
+        : { opacity: 0, y: 20 };
 
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={animation}
             transition={{ duration: 0.5 }}
             className="mt-12 text-center"
         >

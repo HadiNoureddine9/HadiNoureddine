@@ -19,7 +19,11 @@ export function NetworkSphere() {
     // Generate nodes once - reduced from 80 to 50 for better performance
     const nodes = useMemo(() => {
         const nodeArray: Array<{ x: number; y: number; z: number }> = [];
-        const radius = Math.min(window.innerWidth || 1920, window.innerHeight || 1080) * 0.22;
+        const isClient = typeof window !== "undefined";
+        // Use a safe fallback during SSR to avoid window access
+        const radius = isClient
+            ? Math.min(window.innerWidth || 1920, window.innerHeight || 1080) * 0.22
+            : 300;
         const numNodes = 50; // Reduced from 80
         const goldenRatio = (1 + Math.sqrt(5)) / 2;
         const angleIncrement = Math.PI * 2 * goldenRatio;
