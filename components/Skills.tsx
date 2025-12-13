@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { skills } from '@/data';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import AnimatedCounter from './ui/AnimatedCounter';
 
 const Skills = () => {
@@ -62,24 +62,11 @@ const Skills = () => {
 };
 
 const SkillCategory = React.memo(({ category, categoryIndex }: { category: any; categoryIndex: number }) => {
-    const ref = useRef(null);
-    const hasAnimatedRef = useRef(false);
-    const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-    const shouldAnimate = isInView && !hasAnimatedRef.current;
-    if (shouldAnimate) {
-        hasAnimatedRef.current = true;
-    }
-    const animation = (shouldAnimate || hasAnimatedRef.current)
-        ? { opacity: 1, y: 0 }
-        : { opacity: 0, y: 20 };
-
     return (
         <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={animation}
-            transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: categoryIndex * 0.05 }}
             className="relative p-6 rounded-2xl bg-black-200 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-300"
         >
             {/* Category Header */}
@@ -93,13 +80,11 @@ const SkillCategory = React.memo(({ category, categoryIndex }: { category: any; 
 
             {/* Skills List */}
             <div className="space-y-4">
-                {category.items.map((skill: any, index: number) => (
+                {category.items.map((skill: any) => (
                     <SkillItem
                         key={skill.name}
                         skill={skill}
                         gradient={category.gradient}
-                        delay={categoryIndex * 0.1 + index * 0.05}
-                        isParentInView={isInView}
                     />
                 ))}
             </div>
@@ -109,18 +94,7 @@ const SkillCategory = React.memo(({ category, categoryIndex }: { category: any; 
 
 SkillCategory.displayName = 'SkillCategory';
 
-const SkillItem = React.memo(({ skill, gradient, delay, isParentInView }: { skill: any; gradient: string; delay: number; isParentInView: boolean }) => {
-    const barRef = useRef(null);
-    const hasAnimatedRef = useRef(false);
-    const barInView = useInView(barRef, { once: true, amount: 0.1 });
-
-    // Only animate if parent is in view and bar is in view, and hasn't animated yet
-    const shouldAnimate = barInView && isParentInView && !hasAnimatedRef.current;
-    if (shouldAnimate) {
-        hasAnimatedRef.current = true;
-    }
-    const animationWidth = (shouldAnimate || hasAnimatedRef.current) ? `${skill.proficiency}%` : 0;
-
+const SkillItem = React.memo(({ skill, gradient }: { skill: any; gradient: string }) => {
     return (
         <div className="group">
             <div className="flex items-center justify-between mb-2">
@@ -138,11 +112,12 @@ const SkillItem = React.memo(({ skill, gradient, delay, isParentInView }: { skil
             </div>
 
             {/* Proficiency Bar */}
-            <div ref={barRef} className="w-full h-1.5 bg-white/[0.05] rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-white/[0.05] rounded-full overflow-hidden">
                 <motion.div
                     initial={{ width: 0 }}
-                    animate={{ width: animationWidth }}
-                    transition={{ duration: 1, delay }}
+                    whileInView={{ width: `${skill.proficiency}%` }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7 }}
                     className="h-full rounded-full"
                     style={{ background: gradient }}
                 />

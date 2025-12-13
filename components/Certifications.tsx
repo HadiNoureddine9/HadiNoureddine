@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef, memo, useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { certifications } from '@/data';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Certifications = () => {
@@ -60,26 +60,15 @@ const Certifications = () => {
     );
 };
 
-const CertificationCard = memo(({ cert, badgeUrl, index }: { cert: any; badgeUrl: string | null; index: number }) => {
-    const ref = useRef(null);
-    const hasAnimatedRef = useRef(false);
-    const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-    const shouldAnimate = isInView && !hasAnimatedRef.current;
-    if (shouldAnimate) {
-        hasAnimatedRef.current = true;
-    }
-
+const CertificationCard = memo(({ cert, badgeUrl }: { cert: any; badgeUrl: string | null; index: number }) => {
     return (
         <motion.a
-            ref={ref}
             href={cert.credlyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -8, scale: 1.02 }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
             className="group relative p-6 rounded-2xl bg-gradient-to-br from-black-200 to-black-100 border border-white/[0.1] hover:border-purple/[0.5] transition-all duration-300 cursor-pointer overflow-hidden flex flex-col"
         >
             <div className="absolute inset-0 bg-gradient-to-br from-purple/[0.05] to-blue-500/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -91,6 +80,8 @@ const CertificationCard = memo(({ cert, badgeUrl, index }: { cert: any; badgeUrl
                             <img
                                 src={badgeUrl}
                                 alt={cert.name}
+                                width={80}
+                                height={80}
                                 className="w-full h-full object-contain"
                                 onError={(e) => {
                                     e.currentTarget.style.display = 'none';
@@ -129,21 +120,11 @@ const CertificationCard = memo(({ cert, badgeUrl, index }: { cert: any; badgeUrl
 CertificationCard.displayName = 'CertificationCard';
 
 const MLSpecializationCard = memo(() => {
-    const ref = useRef(null);
-    const hasAnimatedRef = useRef(false);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-    const shouldAnimate = isInView && !hasAnimatedRef.current;
-    if (shouldAnimate) {
-        hasAnimatedRef.current = true;
-    }
-
     return (
         <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
             className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-purple/[0.1] to-blue-500/[0.1] border border-purple/[0.3]"
         >
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">

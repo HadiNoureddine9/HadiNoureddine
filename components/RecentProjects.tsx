@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState, useRef, memo, useMemo } from "react";
+import React, { useState, useRef, memo, useMemo, useEffect } from "react";
 import { projects } from "@/data";
 import { motion, useInView } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+
+// Module-level Set to persist animation state across component remounts
+const animatedProjects = new Set<string>();
 
 const RecentProjects = () => {
   const [filter, setFilter] = useState("all");
@@ -14,6 +17,15 @@ const RecentProjects = () => {
       ? projects
       : projects.filter(p => p.category === filter);
   }, [filter]);
+
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:RecentProjects:mount',message:'Parent mount',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'parent-mount',hypothesisId:'P'})}).catch(()=>{});
+    return () => {
+      fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:RecentProjects:unmount',message:'Parent unmount',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'parent-mount',hypothesisId:'P'})}).catch(()=>{});
+    };
+  }, []);
+  // #endregion
 
   return (
     <div className="py-20" id="projects">
@@ -56,20 +68,62 @@ const RecentProjects = () => {
 
 const ProjectCard = memo(({ project, index }: { project: any; index: number }) => {
   const ref = useRef(null);
-  const hasAnimatedRef = useRef(false);
+  const projectId = project.id;
+  const hasAnimatedRef = useRef(animatedProjects.has(projectId));
+  const [, forceRender] = useState(0);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:ProjectCard:mount',message:'Card mount',data:{index,projectId},timestamp:Date.now(),sessionId:'debug-session',runId:'parent-mount',hypothesisId:'P'})}).catch(()=>{});
+    return () => {
+      fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:ProjectCard:unmount',message:'Card unmount',data:{index,projectId},timestamp:Date.now(),sessionId:'debug-session',runId:'parent-mount',hypothesisId:'P'})}).catch(()=>{});
+    };
+  }, [projectId, index]);
+  // #endregion
+
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:ProjectCard:render',message:'Component render',data:{index,projectId,isInView,hasAnimated:hasAnimatedRef.current},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v4',hypothesisId:'B'})}).catch(()=>{});
+  });
+  // #endregion
+
   // Prevent re-animation if already animated
-  const shouldAnimate = isInView && !hasAnimatedRef.current;
-  if (shouldAnimate) {
-    hasAnimatedRef.current = true;
-  }
+  useEffect(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:ProjectCard:effect',message:'Effect triggered',data:{index,projectId,isInView,hasAnimated:hasAnimatedRef.current,shouldSet:isInView && !hasAnimatedRef.current},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v4',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
+    // Only animate if not already animated (check both ref and Set)
+    if (isInView && !hasAnimatedRef.current) {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:ProjectCard:setState',message:'Marking animated',data:{index,projectId,isInView},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v4',hypothesisId:'D'})}).catch(()=>{});
+      // #endregion
+      hasAnimatedRef.current = true;
+      animatedProjects.add(projectId);
+      forceRender((v) => v + 1);
+    }
+  }, [isInView, projectId]);
+
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:ProjectCard:isInView',message:'isInView changed',data:{index,projectId,isInView,hasAnimated:hasAnimatedRef.current},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v4',hypothesisId:'A'})}).catch(()=>{});
+  }, [isInView, projectId]);
+  // #endregion
+
+  const animateValue = useMemo(() => ({ opacity: 1, y: 0 }), []);
+  const initialValue = false;
+  
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/20b43cd0-9445-4981-9d73-fd9eb34684f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'RecentProjects.tsx:ProjectCard:animate',message:'Animate value calculated',data:{index,projectId,hasAnimated:hasAnimatedRef.current,shouldAnimate,animateValue:JSON.stringify(animateValue),initialValue:JSON.stringify(initialValue)},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v4',hypothesisId:'C'})}).catch(()=>{});
+  }, [index, projectId, shouldAnimate, animateValue, initialValue]);
+  // #endregion
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      initial={initialValue}
+      animate={animateValue}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative rounded-2xl bg-black-200 border border-white/[0.1] hover:border-purple/[0.5] transition-all duration-300 overflow-hidden"
     >
@@ -177,19 +231,20 @@ ProjectCard.displayName = 'ProjectCard';
 
 const CallToAction = memo(() => {
   const ref = useRef(null);
-  const hasAnimatedRef = useRef(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
-  const shouldAnimate = isInView && !hasAnimatedRef.current;
-  if (shouldAnimate) {
-    hasAnimatedRef.current = true;
-  }
+  useEffect(() => {
+    if (isInView && !hasAnimated) {
+      setHasAnimated(true);
+    }
+  }, [isInView, hasAnimated]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      initial={false}
+      animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
       className="mt-12 text-center"
     >
