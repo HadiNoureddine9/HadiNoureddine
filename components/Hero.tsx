@@ -118,7 +118,7 @@ const Hero = memo(() => {
           className="absolute bottom-3 md:bottom-8 left-0 right-0 flex justify-center gap-6 md:gap-24"
         >
           <div className="text-center">
-            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">4+</div>
+            <div className="text-xl md:text-4xl mb-2 tracking-tight bg-gradient-to-r from-purple via-blue-500 to-cyan-400 bg-clip-text text-transparent font-bold">3+</div>
             <div className="text-[10px] text-white-100/50 uppercase tracking-[0.2em]">Years Exp.</div>
           </div>
           <div className="text-center">

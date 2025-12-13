@@ -46,7 +46,7 @@ const Skills = () => {
                 </div>
                 <div className="text-center p-6 rounded-xl bg-black-200 border border-white/[0.1]">
                     <div className="text-3xl md:text-4xl font-bold text-purple mb-2">
-                        <AnimatedCounter value={4} suffix="+" />
+                        <AnimatedCounter value={3} suffix="+" />
                     </div>
                     <div className="text-sm text-white-200">Years Experience</div>
                 </div>
